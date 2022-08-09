@@ -15,24 +15,35 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Timeless Masterpieces for your heavenly abode."
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:text="Timeless Masterpieces"
+            android:textColor="@color/gold"
+            android:textStyle="bold"
+            android:textSize="28dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="for your heavenly abode."
+            android:textColor="@color/gray"
+            android:textSize="20dp"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="OIL PAINTINGS"/>
+            android:text="OIL PAINTINGS"
+            android:backgroundTint="@color/gold"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="PHOTOGRAPHS"/>
+            android:text="PHOTOGRAPHS"
+            android:backgroundTint="@color/gold"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="DIGITAL ART"/>
+            android:text="DIGITAL ART"
+            android:backgroundTint="@color/gold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
