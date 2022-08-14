@@ -9,6 +9,6 @@ This report will explore the detailed analysis carried out during the planning s
 - Install latest version of Android Studio.
 - Install pixel 5 emulator running API version 32.
 - Login to firebase with our shared group account (credentials available in drive).
-- Download the ```google-services.json``` file from firebase and put it the top level directory.
+- Download the ```google-services.json``` file from firebase and put it the app directory.
 - Everything should run correctly.
 
