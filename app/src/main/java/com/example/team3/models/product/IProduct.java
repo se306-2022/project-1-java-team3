@@ -12,6 +12,5 @@ public interface IProduct {
     String getMainColour();
     String getTheme();
     String getDescription();
-    String getSize();
     int getViewCount();
 }

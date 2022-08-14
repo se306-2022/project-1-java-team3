@@ -13,11 +13,10 @@ public abstract class Product implements IProduct {
     private String mainColour;
     private String theme;
     private String description;
-    private String size;
     private int viewCount;
 
     public Product(int id, String name, String artist, int year, List<String> images, int price,
-                   String mainColour, String theme, String description, String size, int viewCount) {
+                   String mainColour, String theme, String description, int viewCount) {
         this.id = id;
         this.name = name;
         this.artist = artist;
@@ -26,7 +25,6 @@ public abstract class Product implements IProduct {
         this.mainColour = mainColour;
         this.theme = theme;
         this.description = description;
-        this.size = size;
         this.viewCount = viewCount;
         this.year = year;
     }
@@ -74,11 +72,6 @@ public abstract class Product implements IProduct {
     @Override
     public String getDescription() {
         return description;
-    }
-
-    @Override
-    public String getSize() {
-        return size;
     }
 
     @Override
