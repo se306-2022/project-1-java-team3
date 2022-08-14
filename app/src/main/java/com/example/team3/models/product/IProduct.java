@@ -5,12 +5,13 @@ import java.util.List;
 public interface IProduct {
     int getId();
     String getName();
+    int getYear();
     String getArtist();
     List<String> getImages();
     int getPrice();
     String getMainColour();
     String getTheme();
-    String getDetails();
+    String getDescription();
     String getSize();
     int getViewCount();
 }

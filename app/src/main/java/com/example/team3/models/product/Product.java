@@ -5,17 +5,19 @@ import java.util.List;
 public abstract class Product implements IProduct {
 
     private int id;
+    private int year;
     private String name;
     private String artist;
     private List<String> images;
     private int price;
     private String mainColour;
     private String theme;
-    private String details;
+    private String description;
     private String size;
     private int viewCount;
 
-    public Product(int id, String name, String artist, List<String> images, int price, String mainColour, String theme, String details, String size, int viewCount) {
+    public Product(int id, String name, String artist, int year, List<String> images, int price,
+                   String mainColour, String theme, String description, String size, int viewCount) {
         this.id = id;
         this.name = name;
         this.artist = artist;
@@ -23,12 +25,16 @@ public abstract class Product implements IProduct {
         this.price = price;
         this.mainColour = mainColour;
         this.theme = theme;
-        this.details = details;
+        this.description = description;
         this.size = size;
         this.viewCount = viewCount;
+        this.year = year;
     }
 
     public Product() {}
+
+    @Override
+    public int getYear() {return year;}
 
     @Override
     public int getId() {
@@ -66,8 +72,8 @@ public abstract class Product implements IProduct {
     }
 
     @Override
-    public String getDetails() {
-        return details;
+    public String getDescription() {
+        return description;
     }
 
     @Override
