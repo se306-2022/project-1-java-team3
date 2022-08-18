@@ -1,10 +1,15 @@
-painting,1,Mona Lisa,Leonardo Davinci,1534,1,5000000,#A3662D,romance,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,2,Heaven's Gate,Michael Angelo,1468,2,24000000,#6597E0,religion,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,3,Princess Rosetta,Leonardo Davinci,1834,3,18000000,#A07958,romance,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,4,River Bank Rome,Casper David,1438,4,12000000,#3A472B,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,5,Explorers of Yore,William Blake,1768,5,8000000,#D06940,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,6,Factory Girl,Robert Frank,1936,6,4000000,#D8D7D3,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,7,Afghan Girl,Steve McCurry,1984,7,20000000,#782922,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,8,Sunset in Africa,Steve McCurry,1994,8,4000000,#FD4C00,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,9,Paris,John Banks,1998,9,1000000,#C59CAA,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,10,Death Stare,John Banks,2001,10,2000000,#F1A95F,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+painting,1,Mona Lisa,Leonardo Davinci,1534,5000000,#A3662D,romance,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+painting,2,Heaven's Gate,Michael Angelo,1468,24000000,#6597E0,religion,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+painting,3,Princess Rosetta,Leonardo Davinci,1834,18000000,#A07958,romance,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+painting,4,River Bank Rome,Casper David,1438,12000000,#3A472B,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+painting,5,Explorers of Yore,William Blake,1768,8000000,#D06940,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+photo,6,Factory Girl,Robert Frank,1936,4000000,#D8D7D3,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+photo,7,Afghan Girl,Steve McCurry,1984,20000000,#782922,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+photo,8,Sunset in Africa,Steve McCurry,1994,4000000,#FD4C00,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+photo,9,Paris,John Banks,1998,1000000,#C59CAA,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+photo,10,Death Stare,John Banks,2001,2000000,#F1A95F,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+digital,11,A World Away,Sullivan Ramsay,2018,70000,#B589D6,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+digital,12,Yellow Eyes,Vanya Delacruz,2020,35000,#FFD9C2,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+digital,13,A Dying World,Alice Baishi,2021,50000,#008080,abstract,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+digital,14,Highrise Peace,Rico De Zoysa,2019,100000,#B589D6,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+digital,15,Bird Man,Santiago Lopez,2020,2000000,#FF0000,abstract,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0

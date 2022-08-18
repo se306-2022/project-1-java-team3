@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.team3.R;
+import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Painting;
 import com.example.team3.models.product.Photo;
@@ -68,11 +69,11 @@ public class DataProvider {
             String artist = p[3];
             int year = Integer.parseInt(p[4]);
             List<String> images = new ArrayList<>();
-            int price = Integer.parseInt(p[6]);
-            String mainColour = p[7];
-            String theme = p[8];
-            String description = p[9];
-            int viewCount = 0;
+            int price = Integer.parseInt(p[5]);
+            String mainColour = p[6];
+            String theme = p[7];
+            String description = p[8];
+            int viewCount = Integer.parseInt(p[9]);
 
             // Depending on type add object to database.
             switch (type) {
@@ -85,7 +86,8 @@ public class DataProvider {
                     writeToDatabase(photo, "Photos");
                     break;
                 case "digital":
-                    // TODO: get some digital photos.
+                    IProduct digital = new Digital(id, name, artist, year, images, price, mainColour, theme, description, viewCount);
+                    writeToDatabase(digital, "Digital");
                     break;
             }
         }
@@ -102,9 +104,15 @@ public class DataProvider {
 
     public void setImageUrls(int id, String directory) {
         StorageReference storageRef = storage.getReference();
-        for (int i = 1; i <= 3; i++) {
-            storageRef.child(id + "_" + i + ".jpg").getDownloadUrl()
+        // Digital art don't have frames.
+        if (directory.equals("Digital")) {
+            storageRef.child(id + ".jpg").getDownloadUrl()
                     .addOnSuccessListener(uri -> setImageUrl(id, uri.toString(), directory));
+        } else {
+            for (int i = 1; i <= 3; i++) {
+                storageRef.child(id + "_" + i + ".jpg").getDownloadUrl()
+                        .addOnSuccessListener(uri -> setImageUrl(id, uri.toString(), directory));
+            }
         }
     }
 
