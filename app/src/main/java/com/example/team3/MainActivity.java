@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -70,5 +71,23 @@ public class MainActivity extends AppCompatActivity {
     public void seedData() {
         DataProvider dp = new DataProvider(this);
         dp.seedData();
+    }
+
+    public void showPaintings(View v) {
+        Intent listIntent = new Intent(this, ListActivity.class);
+        listIntent.putExtra("key","Paintings");
+        startActivity(listIntent);
+    }
+
+    public void showPhotos(View v) {
+        Intent listIntent = new Intent(this, ListActivity.class);
+        listIntent.putExtra("key","Photos");
+        startActivity(listIntent);
+    }
+
+    public void showDigital(View v) {
+        Intent listIntent = new Intent(this, ListActivity.class);
+        listIntent.putExtra("key","Digital");
+        startActivity(listIntent);
     }
 }

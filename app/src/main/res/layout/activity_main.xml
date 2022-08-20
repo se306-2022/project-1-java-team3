@@ -40,21 +40,24 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/gold"
                 android:text="PHOTOGRAPHS"
-                android:textAlignment="textStart"/>
+                android:textAlignment="textStart"
+                android:onClick="showPhotos"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/gold"
                 android:text="OIL PAINTINGS"
-                android:textAlignment="textStart"/>
+                android:textAlignment="textStart"
+                android:onClick="showPaintings"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/gold"
                 android:text="DIGITAL ART"
-                android:textAlignment="textStart"/>
+                android:textAlignment="textStart"
+                android:onClick="showDigital"/>
 
         </LinearLayout>
 
