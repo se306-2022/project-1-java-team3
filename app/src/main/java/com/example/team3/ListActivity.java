@@ -3,9 +3,11 @@ package com.example.team3;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,9 +27,11 @@ public class ListActivity extends AppCompatActivity {
     private class ViewHolder {
         public RecyclerView recyclerView;
         public ProgressBar progressBar;
+        public TextView categoryName;
         public ViewHolder() {
             recyclerView = findViewById(R.id.recycler_view);
             progressBar = findViewById(R.id.featured_progress_bar);
+            categoryName = findViewById(R.id.category_name);
         }
     }
 
@@ -46,6 +50,7 @@ public class ListActivity extends AppCompatActivity {
         String category = extras.getString("key");
 
         vh = new ViewHolder();
+        vh.categoryName.setText(category);
 
         productsList = new LinkedList<>();
         adapter = new ProductAdapter(productsList);
@@ -75,5 +80,10 @@ public class ListActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Loading products failed.", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void showMain(View v) {
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
     }
 }
