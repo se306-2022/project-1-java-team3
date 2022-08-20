@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query.Direction;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -48,6 +48,9 @@ public class ListActivity extends AppCompatActivity {
     private ViewHolder vh;
     private ProductAdapter adapter;
     private List<IProduct> productsList;
+    private Filter priceFilter;
+    private Filter themeFilter;
+    private Filter colourFilter;
 
 
     @Override
@@ -59,8 +62,10 @@ public class ListActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String category = extras.getString("key");
 
-
         vh = new ViewHolder();
+        priceFilter = new Filter(vh.priceSpinner);
+        themeFilter = new Filter(vh.themeSpinner);
+        colourFilter = new Filter(vh.colourSpinner);
 
         // Change Header text
         if (Objects.equals(category, "Photos")) {
@@ -71,11 +76,6 @@ public class ListActivity extends AppCompatActivity {
             vh.headerText.setText(R.string.Digital);
         }
 
-        // Set spinner values
-        setFilterSpinner(vh.priceSpinner, R.array.price_filters);
-        setFilterSpinner(vh.themeSpinner, R.array.theme_filters);
-        setFilterSpinner(vh.colourSpinner, R.array.colour_filters);
-
         productsList = new LinkedList<>();
         adapter = new ProductAdapter(productsList);
 
@@ -83,20 +83,45 @@ public class ListActivity extends AppCompatActivity {
 
         fetchProductsData(category);
 
+        vh.priceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (position>0){
+                    String selectedItem = parentView.getItemAtPosition(position).toString();
+                    fetchPriceSortedProductsData(category, selectedItem);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {}
+
+        });
+
         vh.themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position>0){
                     String selectedItem = parentView.getItemAtPosition(position).toString();
-                    getProductsByFilter(category, "theme", selectedItem);
+                    fetchProductsByFilter(category, "theme", selectedItem.toLowerCase());
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+            public void onNothingSelected(AdapterView<?> parentView) {}
+
+        });
+
+        vh.colourSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (position>0){
+                    String selectedItem = parentView.getItemAtPosition(position).toString();
+                    fetchProductsByFilter(category, "mainColour", selectedItem);
+                }
             }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {}
         });
     }
 
@@ -104,6 +129,41 @@ public class ListActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection(category).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (category.equals("Painting")) {
+                    productsList.addAll(task.getResult().toObjects(Painting.class));
+                } else if (category.equals("Photo")) {
+                    productsList.addAll(task.getResult().toObjects(Photo.class));
+                } else {
+                    productsList.addAll(task.getResult().toObjects(Digital.class));
+                }
+
+                priceFilter.setFilterSpinner(this, R.array.price_filters);
+                themeFilter.setFilterSpinnerDynamic(this, productsList, "theme");
+                colourFilter.setFilterSpinnerDynamic(this, productsList, "colour");
+
+                adapter.notifyDataSetChanged();
+
+                vh.progressBar.setVisibility(View.GONE);
+                Toast.makeText(getBaseContext(), "Loading products successful.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getBaseContext(), "Loading products failed.", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void fetchPriceSortedProductsData(String category, String order) {
+        productsList.clear();
+        
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Direction direction;
+        if (order.equals("Price Asc")){
+            direction = Direction.ASCENDING;
+        } else {
+            direction = Direction.DESCENDING;
+        }
+
+        db.collection(category).orderBy("price", direction).limit(3).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if (category.equals("Painting")) {
                     productsList.addAll(task.getResult().toObjects(Painting.class));
@@ -123,23 +183,11 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
-    public void showMain(View v) {
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
-    }
-
-    private void setFilterSpinner(Spinner spinner, int options) {
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
-                options, R.layout.filter_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
-    }
-
-    public void getProductsByFilter(String category, String filterType, String filterValue) {
+    public void fetchProductsByFilter(String category, String filterType, String filterValue) {
         productsList.clear();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection(category).whereEqualTo(filterType.toLowerCase(), filterValue.toLowerCase()).get().addOnCompleteListener(task -> {
+        db.collection(category).whereEqualTo(filterType, filterValue).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if (category.equals("Painting")) {
                     productsList.addAll(task.getResult().toObjects(Painting.class));
@@ -151,6 +199,7 @@ public class ListActivity extends AppCompatActivity {
 
                 adapter.notifyDataSetChanged();
 
+
                 vh.progressBar.setVisibility(View.GONE);
                 if (productsList.size() > 0) {
                     Toast.makeText(getBaseContext(), "Filter successful.", Toast.LENGTH_LONG).show();
@@ -161,5 +210,10 @@ public class ListActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Filter failed.", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void showMain(View v) {
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
     }
 }
