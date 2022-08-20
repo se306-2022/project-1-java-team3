@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,6 +47,9 @@ public class ListActivity extends AppCompatActivity {
     private ViewHolder vh;
     private ProductAdapter adapter;
     private List<IProduct> productsList;
+    private Filter priceFilter;
+    private Filter themeFilter;
+    private Filter colourFilter;
 
 
     @Override
@@ -59,8 +61,10 @@ public class ListActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String category = extras.getString("key");
 
-
         vh = new ViewHolder();
+        priceFilter = new Filter(vh.priceSpinner);
+        themeFilter = new Filter(vh.themeSpinner);
+        colourFilter = new Filter(vh.colourSpinner);
 
         // Change Header text
         if (Objects.equals(category, "Photos")) {
@@ -70,11 +74,6 @@ public class ListActivity extends AppCompatActivity {
         } else {
             vh.headerText.setText(R.string.Digital);
         }
-
-        // Set spinner values
-        setFilterSpinner(vh.priceSpinner, R.array.price_filters);
-        setFilterSpinner(vh.themeSpinner, R.array.theme_filters);
-        setFilterSpinner(vh.colourSpinner, R.array.colour_filters);
 
         productsList = new LinkedList<>();
         adapter = new ProductAdapter(productsList);
@@ -113,6 +112,10 @@ public class ListActivity extends AppCompatActivity {
                     productsList.addAll(task.getResult().toObjects(Digital.class));
                 }
 
+                priceFilter.setFilterSpinner(this, R.array.price_filters);
+                themeFilter.setFilterSpinnerDynamic(this, productsList, "theme");
+                colourFilter.setFilterSpinnerDynamic(this, productsList, "colour");
+
                 adapter.notifyDataSetChanged();
 
                 vh.progressBar.setVisibility(View.GONE);
@@ -121,18 +124,6 @@ public class ListActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Loading products failed.", Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    public void showMain(View v) {
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
-    }
-
-    private void setFilterSpinner(Spinner spinner, int options) {
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
-                options, R.layout.filter_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
     }
 
     public void getProductsByFilter(String category, String filterType, String filterValue) {
@@ -161,5 +152,10 @@ public class ListActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Filter failed.", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void showMain(View v) {
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
     }
 }
