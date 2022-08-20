@@ -1,15 +1,20 @@
 package com.example.team3;
 
 import android.content.Context;
+import android.os.Build;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import androidx.annotation.RequiresApi;
+
 import com.example.team3.models.product.IProduct;
+import com.example.team3.models.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Filter {
     Spinner spinner;

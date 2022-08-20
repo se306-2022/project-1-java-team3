@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
@@ -87,7 +88,24 @@ public class ListActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position>0){
                     String selectedItem = parentView.getItemAtPosition(position).toString();
-                    getProductsByFilter(category, "theme", selectedItem);
+                    getProductsByFilter(category, "theme", selectedItem.toLowerCase());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+        vh.colourSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (position>0){
+                    String selectedItem = parentView.getItemAtPosition(position).toString();
+                    Log.d("danikadebug", selectedItem);
+                    getProductsByFilter(category, "mainColour", selectedItem);
                 }
             }
 
@@ -130,7 +148,7 @@ public class ListActivity extends AppCompatActivity {
         productsList.clear();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection(category).whereEqualTo(filterType.toLowerCase(), filterValue.toLowerCase()).get().addOnCompleteListener(task -> {
+        db.collection(category).whereEqualTo(filterType, filterValue).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if (category.equals("Painting")) {
                     productsList.addAll(task.getResult().toObjects(Painting.class));
@@ -141,6 +159,7 @@ public class ListActivity extends AppCompatActivity {
                 }
 
                 adapter.notifyDataSetChanged();
+
 
                 vh.progressBar.setVisibility(View.GONE);
                 if (productsList.size() > 0) {
