@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="price_filters">
+        <item>Sort By Price</item>
+        <item>Price Asc</item>
+        <item>Price Desc</item>
+    </string-array>
+
+    <string-array name="theme_filters">
+        <item>Filter By Theme</item>
+        <item>Romance</item>
+        <item>Religion</item>
+        <item>Romance</item>
+        <item>Landscape</item>
+        <item>City</item>
+        <item>Portrait</item>
+        <item>Landscape</item>
+        <item>Abstract</item>
+    </string-array>
+
+    <string-array name="colour_filters">
+        <item>Filter By Colour</item>
+        <item>Colour A</item>
+        <item>Colour B</item>
+        <item>Colour C</item>
+        <item>Colour D</item>
+    </string-array>
+
+</resources>
+
