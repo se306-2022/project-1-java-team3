@@ -1,6 +1,7 @@
 package com.example.team3.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,8 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView nameTextView, priceTextView, descriptionTextView;
-        public final ImageView imageView;
+        public TextView nameTextView, priceTextView, descriptionTextView;
+        public ImageView imageView;
 
         public ViewHolder(View view) {
             super(view);
@@ -29,6 +30,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             priceTextView = view.findViewById(R.id.product_price);
             descriptionTextView = view.findViewById(R.id.product_desc);
             imageView = view.findViewById(R.id.product_image);
+        }
+
+        public TextView getNameTextView() {
+            return nameTextView;
         }
     }
 
@@ -57,7 +62,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         IProduct product = products.get(position);
 
         holder.nameTextView.setText(product.getName());
-        holder.priceTextView.setText(product.getPrice());
+        holder.priceTextView.setText(String.valueOf(product.getPrice()));
         holder.descriptionTextView.setText(product.getDescription());
 
         String firstImageUrl = product.getImages().get(0);
