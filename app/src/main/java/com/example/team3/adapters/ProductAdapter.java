@@ -1,17 +1,21 @@
 package com.example.team3.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.team3.DetailsActivity;
 import com.example.team3.R;
 import com.example.team3.models.product.IProduct;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,9 +27,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nameTextView, priceTextView, descriptionTextView;
         public ImageView imageView;
+        private CardView layout;
 
         public ViewHolder(View view) {
             super(view);
+            layout  = view.findViewById(R.id.card_layout);
             nameTextView  = view.findViewById(R.id.product_name);
             priceTextView = view.findViewById(R.id.product_price);
             descriptionTextView = view.findViewById(R.id.product_desc);
@@ -69,6 +75,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         if (firstImageUrl != null) {
             Glide.with(context).load(firstImageUrl).into(holder.imageView);
         }
+
+        holder.layout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent detailsIntent = new Intent(v.getContext(), DetailsActivity.class);
+                detailsIntent.putExtra("name", products.get(position).getName());
+                detailsIntent.putExtra("artist", products.get(position).getArtist());
+                detailsIntent.putExtra("description", products.get(position).getDescription());
+                detailsIntent.putExtra("price", String.valueOf(products.get(position).getPrice()));
+                detailsIntent.putExtra("image", products.get(position).getImages().get(0));
+                v.getContext().startActivity(detailsIntent);
+            }
+        });
     }
 
     @Override

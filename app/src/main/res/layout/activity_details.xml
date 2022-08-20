@@ -19,59 +19,28 @@
             android:background="@color/lightGray"
             android:elevation="5dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/back_button"
+                    android:background="@color/lightGray"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:onClick="showMain"/>
+
+            </LinearLayout>
+
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
-                android:id="@+id/productSlider">
+                android:id="@+id/productImage">
             </ImageView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:text="FRAME STYLE"
-                    android:textColor="@color/gray"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SIZE"
-                    android:textColor="@color/gray"
-                    android:textSize="14dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:text="options"
-                    android:textColor="@color/gray"
-                    android:textSize="14dp"
-                    android:id="@+id/frameOptions"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="image_size"
-                    android:textColor="@color/gray"
-                    android:textSize="14dp"
-                    android:id="@+id/imageSize"/>
-
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -85,20 +54,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="MONA LISA"
+                android:text="LOADING..."
                 android:textColor="@color/gray"
                 android:textSize="28dp"
                 android:textStyle="bold"
-                android:id="@+id/productTitle"/>
+                android:id="@+id/productName"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Painted by Leonardo da Vinci"
+                android:text="Loading..."
                 android:textColor="@color/gray"
                 android:textSize="12dp"
-                android:id="@+id/productArtist"/>
+                android:id="@+id/productCreator"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -106,7 +75,9 @@
                 android:layout_gravity="left"
                 android:text="History"
                 android:textColor="@color/gray"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -116,13 +87,13 @@
                 app:cardUseCompatPadding="true">
 
                 <TextView
+                    android:id="@+id/productDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="A lot of text goes here."
-                    android:textColor="@color/gray"
-                    android:textSize="14dp"
                     android:padding="10dp"
-                    android:id="@+id/productDescription"/>
+                    android:text="Product description"
+                    android:textColor="@color/gray"
+                    android:textSize="14dp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -151,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:padding="10dp"
-                        android:text="390,660,000 AED"
+                        android:text="100,000,000 USD"
                         android:textColor="@color/red"
                         android:textSize="14dp"
                         android:textStyle="bold"
