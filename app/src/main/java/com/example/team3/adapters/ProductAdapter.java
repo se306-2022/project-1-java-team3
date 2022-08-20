@@ -62,7 +62,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         IProduct product = products.get(position);
 
         holder.nameTextView.setText(product.getName());
-        holder.priceTextView.setText(String.valueOf(product.getPrice()));
+        holder.priceTextView.setText(String.valueOf(product.getPrice()) + " USD");
         holder.descriptionTextView.setText(product.getDescription());
 
         String firstImageUrl = product.getImages().get(0);
