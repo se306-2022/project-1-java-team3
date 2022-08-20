@@ -16,6 +16,9 @@ import com.example.team3.adapters.ProductAdapter;
 import com.example.team3.adapters.ProductAdapter;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Product;
+import com.example.team3.models.product.Painting;
+import com.example.team3.models.product.Photo;
+import com.example.team3.models.product.Digital;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -56,7 +59,14 @@ public class ListActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(category).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                productsList.addAll(task.getResult().toObjects(Product.class));
+                if (category == "Painting") {
+                    productsList.addAll(task.getResult().toObjects(Painting.class));
+                } else if (category == "Photo") {
+                    productsList.addAll(task.getResult().toObjects(Photo.class));
+                } else {
+                    productsList.addAll(task.getResult().toObjects(Digital.class));
+                }
+
                 adapter.notifyDataSetChanged();
 
                 vh.progressBar.setVisibility(View.GONE);
