@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,6 +45,17 @@ public class ListActivity extends AppCompatActivity {
         // Retrieve category
         Bundle extras = getIntent().getExtras();
         String category = extras.getString("key");
+
+        // Change Header text
+        TextView headerText = findViewById(R.id.category_title);
+        if (category == "Photos") {
+            headerText.setText("PHOTOGRAPHS");
+        } else if (category == "Paintings") {
+            headerText.setText("OIL PAINTINGS");
+        } else {
+            headerText.setText("DIGITAL ART");
+        }
+
 
         vh = new ViewHolder();
 
