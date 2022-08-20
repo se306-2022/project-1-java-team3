@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query.Direction;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -83,19 +83,31 @@ public class ListActivity extends AppCompatActivity {
 
         fetchProductsData(category);
 
+        vh.priceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (position>0){
+                    String selectedItem = parentView.getItemAtPosition(position).toString();
+                    fetchPriceSortedProductsData(category, selectedItem);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {}
+
+        });
+
         vh.themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position>0){
                     String selectedItem = parentView.getItemAtPosition(position).toString();
-                    getProductsByFilter(category, "theme", selectedItem.toLowerCase());
+                    fetchProductsByFilter(category, "theme", selectedItem.toLowerCase());
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
+            public void onNothingSelected(AdapterView<?> parentView) {}
 
         });
 
@@ -104,16 +116,12 @@ public class ListActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position>0){
                     String selectedItem = parentView.getItemAtPosition(position).toString();
-                    Log.d("danikadebug", selectedItem);
-                    getProductsByFilter(category, "mainColour", selectedItem);
+                    fetchProductsByFilter(category, "mainColour", selectedItem);
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
+            public void onNothingSelected(AdapterView<?> parentView) {}
         });
     }
 
@@ -144,7 +152,38 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
-    public void getProductsByFilter(String category, String filterType, String filterValue) {
+    private void fetchPriceSortedProductsData(String category, String order) {
+        productsList.clear();
+        
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Direction direction;
+        if (order.equals("Price Asc")){
+            direction = Direction.ASCENDING;
+        } else {
+            direction = Direction.DESCENDING;
+        }
+
+        db.collection(category).orderBy("price", direction).limit(3).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (category.equals("Painting")) {
+                    productsList.addAll(task.getResult().toObjects(Painting.class));
+                } else if (category.equals("Photo")) {
+                    productsList.addAll(task.getResult().toObjects(Photo.class));
+                } else {
+                    productsList.addAll(task.getResult().toObjects(Digital.class));
+                }
+
+                adapter.notifyDataSetChanged();
+
+                vh.progressBar.setVisibility(View.GONE);
+                Toast.makeText(getBaseContext(), "Loading products successful.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getBaseContext(), "Loading products failed.", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void fetchProductsByFilter(String category, String filterType, String filterValue) {
         productsList.clear();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
