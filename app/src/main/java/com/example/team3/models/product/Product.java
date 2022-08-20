@@ -2,7 +2,7 @@ package com.example.team3.models.product;
 
 import java.util.List;
 
-public abstract class Product implements IProduct {
+public class Product implements IProduct {
 
     private int id;
     private int year;
