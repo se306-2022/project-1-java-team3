@@ -105,4 +105,9 @@ public class MainActivity extends AppCompatActivity {
         listIntent.putExtra("key","Digital");
         startActivity(listIntent);
     }
+
+    public void showSearch(View v) {
+        Intent searchIntent = new Intent(this, SearchActivity.class);
+        startActivity(searchIntent);
+    }
 }

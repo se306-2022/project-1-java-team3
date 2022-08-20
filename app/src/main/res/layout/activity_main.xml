@@ -19,6 +19,22 @@
             android:background="@color/lightGray"
             android:elevation="10dp">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/back_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/lightGray"
+                    android:onClick="showSearch"
+                    app:srcCompat="@drawable/ic_baseline_search_24" />
+            </RelativeLayout>
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
