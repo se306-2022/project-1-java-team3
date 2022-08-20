@@ -39,6 +39,7 @@
                     android:id="@+id/search_bar"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:iconifiedByDefault="false"
                     />
 
             </LinearLayout>
@@ -52,7 +53,7 @@
             android:padding="16dp">
 
             <ProgressBar
-                android:id="@+id/featured_progress_bar"
+                android:id="@+id/search_progress_bar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
