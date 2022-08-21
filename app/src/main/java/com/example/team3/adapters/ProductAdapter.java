@@ -2,6 +2,7 @@ package com.example.team3.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +69,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         IProduct product = products.get(position);
 
         holder.nameTextView.setText(product.getName());
-        holder.priceTextView.setText(String.valueOf(product.getPrice()) + " USD");
+        holder.priceTextView.setText(product.getPrice() + " USD");
         holder.descriptionTextView.setText(product.getDescription());
 
         String firstImageUrl = product.getImages().get(0);
@@ -76,17 +77,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             Glide.with(context).load(firstImageUrl).into(holder.imageView);
         }
 
-        holder.layout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent detailsIntent = new Intent(v.getContext(), DetailsActivity.class);
-                detailsIntent.putExtra("name", products.get(position).getName());
-                detailsIntent.putExtra("artist", products.get(position).getArtist());
-                detailsIntent.putExtra("description", products.get(position).getDescription());
-                detailsIntent.putExtra("price", String.valueOf(products.get(position).getPrice()));
-                detailsIntent.putExtra("image", products.get(position).getImages().get(0));
-                v.getContext().startActivity(detailsIntent);
-            }
+        holder.layout.setOnClickListener(v -> {
+            Intent detailsIntent = new Intent(v.getContext(), DetailsActivity.class);
+            detailsIntent.putExtra("name", product.getName());
+            detailsIntent.putExtra("artist", product.getArtist());
+            detailsIntent.putExtra("description", product.getDescription());
+            detailsIntent.putExtra("price", String.valueOf(product.getPrice()));
+            detailsIntent.putExtra("image", product.getImages().get(0));
+            detailsIntent.putExtra("type", product.getCategory());
+            detailsIntent.putExtra("id", String.valueOf(product.getId()));
+            v.getContext().startActivity(detailsIntent);
         });
     }
 
