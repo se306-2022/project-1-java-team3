@@ -16,9 +16,12 @@ import com.example.team3.adapters.ProductAdapter;
 import com.example.team3.data.DataProvider;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Product;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
@@ -37,11 +40,14 @@ public class MainActivity extends AppCompatActivity {
     private ViewHolder vh;
     private ProductAdapter adapter;
     private List<IProduct> productsList;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = FirebaseFirestore.getInstance();
 
         vh = new ViewHolder();
 
@@ -54,13 +60,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchProductsData() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Paintings").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 productsList.addAll(task.getResult().toObjects(Product.class));
-                adapter.notifyDataSetChanged();
+                db.collection("Digital").get().addOnSuccessListener(queryDocumentSnapshotsDigital -> {
+                    productsList.addAll(queryDocumentSnapshotsDigital.toObjects(Product.class));
+                    db.collection("Photos").get().addOnSuccessListener(queryDocumentSnapshotsPhotos -> {
+                        productsList.addAll(queryDocumentSnapshotsPhotos.toObjects(Product.class));
 
-                vh.progressBar.setVisibility(View.GONE);
+                        Collections.sort(productsList, (o1, o2) -> {
+                            if(o1.getViewCount() == o2.getViewCount()) return 0;
+                            return o1.getViewCount() > o2.getViewCount() ? -1 : 1;
+                        });
+
+                        adapter.notifyDataSetChanged();
+                        vh.progressBar.setVisibility(View.GONE);
+                    });
+                });
             } else {
                 Toast.makeText(getBaseContext(), "Loading products failed.", Toast.LENGTH_LONG).show();
             }
