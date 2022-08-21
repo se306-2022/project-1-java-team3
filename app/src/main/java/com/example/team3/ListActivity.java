@@ -180,7 +180,7 @@ public class ListActivity extends AppCompatActivity {
             direction = Direction.DESCENDING;
         }
 
-        db.collection(category).orderBy("price", direction).limit(3).get().addOnCompleteListener(task -> {
+        db.collection(category).orderBy("price", direction).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if (category.equals("Painting")) {
                     productsList.addAll(task.getResult().toObjects(Painting.class));
