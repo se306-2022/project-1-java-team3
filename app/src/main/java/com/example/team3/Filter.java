@@ -1,20 +1,16 @@
 package com.example.team3;
 
 import android.content.Context;
-import android.os.Build;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import androidx.annotation.RequiresApi;
 
 import com.example.team3.models.product.IProduct;
-import com.example.team3.models.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Filter {
     Spinner spinner;
@@ -23,6 +19,12 @@ public class Filter {
         this.spinner = spinner;
     }
 
+    /**
+     * Sets filter spinner drop down values to set values
+     *
+     * @param  c  current context
+     * @param  options static list of options to populate - resource file
+     */
     public void setFilterSpinner(Context c, int options) {
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(c,
                 options, R.layout.filter_spinner_item);
@@ -30,8 +32,15 @@ public class Filter {
         spinner.setAdapter(spinnerAdapter);
     }
 
+    /**
+     * Sets filter spinner drop down values dynamically based on the available products
+     *
+     * @param  c  current context
+     * @param  productsList List of products currently loaded for category
+     * @param  type filter type - implemented for theme and colour
+     */
     public void setFilterSpinnerDynamic(Context c, List<IProduct> productsList, String type) {
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
         String currentProduct="";
 
         for (IProduct product : productsList) {

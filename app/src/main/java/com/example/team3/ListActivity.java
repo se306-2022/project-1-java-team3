@@ -132,7 +132,6 @@ public class ListActivity extends AppCompatActivity {
      * Populates product adapter with all products in the selected category
      *
      * @param  category  current category showing on list view
-     * @return      void
      */
     private void fetchProductsData(String category) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -167,7 +166,6 @@ public class ListActivity extends AppCompatActivity {
      *
      * @param  category  current category showing on list view
      * @param  order ascending or descending
-     * @return      void
      */
     private void fetchPriceSortedProductsData(String category, String order) {
         productsList.clear();
@@ -208,7 +206,6 @@ public class ListActivity extends AppCompatActivity {
      * @param  category  current category showing on list view
      * @param  filterType which field to filter on - theme, mainColour
      * @param  filterValue the value to match
-     * @return      void
      */
     public void fetchProductsByFilter(String category, String filterType, String filterValue) {
         productsList.clear();
