@@ -56,9 +56,17 @@ public class DetailsActivity extends AppCompatActivity {
         vh.productDesc.setText(getIntent().getExtras().getString("description"));
         vh.productPrice.setText(getIntent().getExtras().getString("price") + " USD");
 
+        setImages();
+
         db = FirebaseFirestore.getInstance();
 
         incrementViewCount();
+    }
+
+    private void setImages() {
+        String imageUrl = getIntent().getExtras().getString("image");
+        Glide.with(this).load(imageUrl).into(vh.productImage);
+        // TODO do for multiple images. Intents can hold array values I think.
     }
 
     public void incrementViewCount() {
