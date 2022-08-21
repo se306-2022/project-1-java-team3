@@ -78,15 +78,15 @@ public class DataProvider {
             // Depending on type add object to database.
             switch (type) {
                 case "painting":
-                    IProduct painting = new Painting(id, name, artist, year, images, price, mainColour, theme, description, viewCount);
+                    IProduct painting = new Painting(id, name, artist, year, images, price, mainColour, theme, description, viewCount, type);
                     writeToDatabase(painting, "Paintings");
                     break;
                 case "photo":
-                    IProduct photo = new Photo(id, name, artist, year, images, price, mainColour, theme, description, viewCount);
+                    IProduct photo = new Photo(id, name, artist, year, images, price, mainColour, theme, description, viewCount, type);
                     writeToDatabase(photo, "Photos");
                     break;
                 case "digital":
-                    IProduct digital = new Digital(id, name, artist, year, images, price, mainColour, theme, description, viewCount);
+                    IProduct digital = new Digital(id, name, artist, year, images, price, mainColour, theme, description, viewCount, type);
                     writeToDatabase(digital, "Digital");
                     break;
             }

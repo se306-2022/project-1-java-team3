@@ -14,9 +14,10 @@ public class Product implements IProduct {
     private String theme;
     private String description;
     private int viewCount;
+    private String category;
 
     public Product(int id, String name, String artist, int year, List<String> images, int price,
-                   String mainColour, String theme, String description, int viewCount) {
+                   String mainColour, String theme, String description, int viewCount, String category) {
         this.id = id;
         this.name = name;
         this.artist = artist;
@@ -27,6 +28,7 @@ public class Product implements IProduct {
         this.description = description;
         this.viewCount = viewCount;
         this.year = year;
+        this.category = category;
     }
 
     public Product() {}
@@ -77,5 +79,10 @@ public class Product implements IProduct {
     @Override
     public int getViewCount() {
         return viewCount;
+    }
+
+    @Override
+    public String getCategory() {
+        return category;
     }
 }

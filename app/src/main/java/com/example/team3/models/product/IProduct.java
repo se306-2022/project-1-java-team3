@@ -13,4 +13,5 @@ public interface IProduct {
     String getTheme();
     String getDescription();
     int getViewCount();
+    String getCategory();
 }
