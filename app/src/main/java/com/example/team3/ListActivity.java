@@ -63,9 +63,6 @@ public class ListActivity extends AppCompatActivity {
         String category = extras.getString("key");
 
         vh = new ViewHolder();
-        priceFilter = new Filter(vh.priceSpinner);
-        themeFilter = new Filter(vh.themeSpinner);
-        colourFilter = new Filter(vh.colourSpinner);
 
         // Change Header text
         if (Objects.equals(category, "Photos")) {
@@ -76,13 +73,19 @@ public class ListActivity extends AppCompatActivity {
             vh.headerText.setText(R.string.Digital);
         }
 
+        // Initialising filters
+        priceFilter = new Filter(vh.priceSpinner);
+        themeFilter = new Filter(vh.themeSpinner);
+
+        // Initialising product list in recycler view
+        colourFilter = new Filter(vh.colourSpinner);
         productsList = new LinkedList<>();
         adapter = new ProductAdapter(productsList);
-
         vh.recyclerView.setAdapter(adapter);
 
         fetchProductsData(category);
 
+        // Filter spinner listeners for changes - price is sort, theme and colour are filter
         vh.priceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -116,7 +119,7 @@ public class ListActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position>0){
                     String selectedItem = parentView.getItemAtPosition(position).toString();
-                    fetchProductsByFilter(category, "mainColour", selectedItem);
+                    fetchProductsByFilter(category, "mainColour", selectedItem.toLowerCase());
                 }
             }
 
@@ -125,6 +128,12 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Populates product adapter with all products in the selected category
+     *
+     * @param  category  current category showing on list view
+     * @return      void
+     */
     private void fetchProductsData(String category) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -138,6 +147,7 @@ public class ListActivity extends AppCompatActivity {
                     productsList.addAll(task.getResult().toObjects(Digital.class));
                 }
 
+                // Dynamically setting filters based off of available products in category
                 priceFilter.setFilterSpinner(this, R.array.price_filters);
                 themeFilter.setFilterSpinnerDynamic(this, productsList, "theme");
                 colourFilter.setFilterSpinnerDynamic(this, productsList, "colour");
@@ -152,10 +162,19 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Repopulates product adapter with products sorted in a given order
+     *
+     * @param  category  current category showing on list view
+     * @param  order ascending or descending
+     * @return      void
+     */
     private void fetchPriceSortedProductsData(String category, String order) {
         productsList.clear();
         
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Setting the direction of sort
         Direction direction;
         if (order.equals("Price Asc")){
             direction = Direction.ASCENDING;
@@ -183,6 +202,14 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Repopulates product adapter with products filtered by given filter
+     *
+     * @param  category  current category showing on list view
+     * @param  filterType which field to filter on - theme, mainColour
+     * @param  filterValue the value to match
+     * @return      void
+     */
     public void fetchProductsByFilter(String category, String filterType, String filterValue) {
         productsList.clear();
 
@@ -198,7 +225,6 @@ public class ListActivity extends AppCompatActivity {
                 }
 
                 adapter.notifyDataSetChanged();
-
 
                 vh.progressBar.setVisibility(View.GONE);
                 if (productsList.size() > 0) {
