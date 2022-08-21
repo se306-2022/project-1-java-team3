@@ -35,7 +35,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             layout  = view.findViewById(R.id.card_layout);
             nameTextView  = view.findViewById(R.id.product_name);
             priceTextView = view.findViewById(R.id.product_price);
-            descriptionTextView = view.findViewById(R.id.product_desc);
+            descriptionTextView = view.findViewById(R.id.product_artist);
             imageView = view.findViewById(R.id.product_image);
         }
 
@@ -70,7 +70,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         holder.nameTextView.setText(product.getName());
         holder.priceTextView.setText(product.getPrice() + " USD");
-        holder.descriptionTextView.setText(product.getDescription());
+        holder.descriptionTextView.setText(product.getArtist());
 
         String firstImageUrl = product.getImages().get(0);
         if (firstImageUrl != null) {
