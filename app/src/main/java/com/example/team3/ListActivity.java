@@ -3,15 +3,17 @@ package com.example.team3;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.team3.utils.SearchUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Collections;
@@ -35,6 +37,8 @@ public class ListActivity extends AppCompatActivity {
         public Spinner themeSpinner;
         public Spinner colourSpinner;
         public TextView headerText;
+        public SearchView searchBar;
+        public ImageButton backButton;
 
         public ViewHolder() {
             recyclerView = findViewById(R.id.recycler_view);
@@ -43,6 +47,8 @@ public class ListActivity extends AppCompatActivity {
             priceSpinner = findViewById(R.id.price_filter);
             themeSpinner = findViewById(R.id.theme_filter);
             colourSpinner = findViewById(R.id.colour_filter);
+            searchBar = findViewById(R.id.search_bar);
+            backButton = findViewById(R.id.back_button);
         }
     }
 
@@ -69,10 +75,13 @@ public class ListActivity extends AppCompatActivity {
         // Change Header text
         if (Objects.equals(category, "Photos")) {
             vh.headerText.setText(R.string.Photos);
+            vh.searchBar.setQueryHint("Search " + getString(R.string.Photos).toLowerCase());
         } else if (Objects.equals(category, "Paintings")) {
             vh.headerText.setText(R.string.Paintings);
+            vh.searchBar.setQueryHint("Search " + getString(R.string.Paintings).toLowerCase());
         } else {
             vh.headerText.setText(R.string.Digital);
+            vh.searchBar.setQueryHint("Search " + getString(R.string.Digital).toLowerCase());
         }
 
         // Initialising filters
@@ -144,6 +153,34 @@ public class ListActivity extends AppCompatActivity {
         vh.themeSpinner.setOnItemSelectedListener(filterListener);
         vh.colourSpinner.setOnItemSelectedListener(filterListener);
 
+        vh.backButton.setOnClickListener(view -> finish());
+
+        vh.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                vh.searchBar.clearFocus();
+                vh.progressBar.setVisibility(View.GONE);
+                List<IProduct> searchResults = SearchUtils.getProductsBySearch(allProducts, s);
+                productsList.clear();
+                productsList.addAll(searchResults);
+                adapter.notifyDataSetChanged();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                productsList.clear();
+                if (s.length() == 0) {
+                    productsList.addAll(allProducts);
+                } else {
+                    List<IProduct> searchResults = SearchUtils.getProductsBySearch(allProducts, s);
+                    productsList.addAll(searchResults);
+                }
+
+                adapter.notifyDataSetChanged();
+                return false;
+            }
+        });
     }
 
     /**
@@ -260,10 +297,5 @@ public class ListActivity extends AppCompatActivity {
         }
 
         return filteredList;
-    }
-
-    public void showMain(View v) {
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
     }
 }
