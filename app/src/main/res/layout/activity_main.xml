@@ -57,7 +57,8 @@
                 android:backgroundTint="@color/gold"
                 android:text="PHOTOGRAPHS"
                 android:textAlignment="textStart"
-                android:onClick="showPhotos"/>
+                android:onClick="showPhotos"
+                android:textSize="16dp"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -65,7 +66,8 @@
                 android:backgroundTint="@color/gold"
                 android:text="OIL PAINTINGS"
                 android:textAlignment="textStart"
-                android:onClick="showPaintings"/>
+                android:onClick="showPaintings"
+                android:textSize="16dp"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -73,7 +75,8 @@
                 android:backgroundTint="@color/gold"
                 android:text="DIGITAL ART"
                 android:textAlignment="textStart"
-                android:onClick="showDigital"/>
+                android:onClick="showDigital"
+                android:textSize="16dp"/>
 
         </LinearLayout>
 
@@ -82,6 +85,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text="FEATURED"
+                android:gravity="center"
+                android:textSize="16dp"/>
 
             <ProgressBar
                 android:id="@+id/featured_progress_bar"
