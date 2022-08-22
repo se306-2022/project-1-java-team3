@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
@@ -48,6 +49,7 @@ public class ListActivity extends AppCompatActivity {
     private ViewHolder vh;
     private ProductAdapter adapter;
     private List<IProduct> productsList;
+    private List<IProduct> allProducts;
     private Filter priceFilter;
     private Filter themeFilter;
     private Filter colourFilter;
@@ -80,6 +82,7 @@ public class ListActivity extends AppCompatActivity {
         // Initialising product list in recycler view
         colourFilter = new Filter(vh.colourSpinner);
         productsList = new LinkedList<>();
+        allProducts = new LinkedList<>();
         adapter = new ProductAdapter(productsList);
         vh.recyclerView.setAdapter(adapter);
 
@@ -105,7 +108,11 @@ public class ListActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position>0){
                     String selectedItem = parentView.getItemAtPosition(position).toString();
-                    fetchProductsByFilter(category, "theme", selectedItem.toLowerCase());
+                    fetchProductsByFilter("theme", selectedItem.toLowerCase());
+                } else {
+                    productsList.clear();
+                    productsList.addAll(allProducts);
+                    adapter.notifyDataSetChanged();
                 }
             }
 
@@ -119,7 +126,11 @@ public class ListActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position>0){
                     String selectedItem = parentView.getItemAtPosition(position).toString();
-                    fetchProductsByFilter(category, "mainColour", selectedItem.toLowerCase());
+                    fetchProductsByFilter("mainColour", selectedItem.toLowerCase());
+                } else {
+                    productsList.clear();
+                    productsList.addAll(allProducts);
+                    adapter.notifyDataSetChanged();
                 }
             }
 
@@ -151,6 +162,9 @@ public class ListActivity extends AppCompatActivity {
                 themeFilter.setFilterSpinnerDynamic(this, productsList, "theme");
                 colourFilter.setFilterSpinnerDynamic(this, productsList, "colour");
 
+                // Saving an instance of all the products for filtering
+                allProducts.addAll(productsList);
+
                 adapter.notifyDataSetChanged();
 
                 vh.progressBar.setVisibility(View.GONE);
@@ -168,7 +182,7 @@ public class ListActivity extends AppCompatActivity {
      * @param  order ascending or descending
      */
     private void fetchPriceSortedProductsData(String category, String order) {
-        productsList.clear();
+        productsList.clear(); // clears the view
         
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -203,36 +217,34 @@ public class ListActivity extends AppCompatActivity {
     /**
      * Repopulates product adapter with products filtered by given filter
      *
-     * @param  category  current category showing on list view
      * @param  filterType which field to filter on - theme, mainColour
      * @param  filterValue the value to match
      */
-    public void fetchProductsByFilter(String category, String filterType, String filterValue) {
-        productsList.clear();
+    public void fetchProductsByFilter(String filterType, String filterValue) {
+        List<IProduct> filteredProducts = new LinkedList<>();
+        productsList.clear(); // clears the view
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection(category).whereEqualTo(filterType, filterValue).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                if (category.equals("Painting")) {
-                    productsList.addAll(task.getResult().toObjects(Painting.class));
-                } else if (category.equals("Photo")) {
-                    productsList.addAll(task.getResult().toObjects(Photo.class));
-                } else {
-                    productsList.addAll(task.getResult().toObjects(Digital.class));
+        for (IProduct product : allProducts) {
+            if (filterType.equals("theme")) {
+                if (product.getTheme().equals(filterValue)){
+                    filteredProducts.add(product);
                 }
-
-                adapter.notifyDataSetChanged();
-
-                vh.progressBar.setVisibility(View.GONE);
-                if (productsList.size() > 0) {
-                    Toast.makeText(getBaseContext(), "Filter successful.", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getBaseContext(), "No Products Fit Filter", Toast.LENGTH_LONG).show();
+            } else if (filterType.equals("mainColour")) {
+                if (product.getMainColour().equals(filterValue)){
+                    filteredProducts.add(product);
                 }
-            } else {
-                Toast.makeText(getBaseContext(), "Filter failed.", Toast.LENGTH_LONG).show();
             }
-        });
+        }
+
+        productsList.addAll(filteredProducts);
+        adapter.notifyDataSetChanged();
+        vh.progressBar.setVisibility(View.GONE);
+
+        if (productsList.size() > 0) {
+            Toast.makeText(getBaseContext(), "Filter successful.", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getBaseContext(), "No Products Fit Filter", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void showMain(View v) {
