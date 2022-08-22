@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query.Direction;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -103,40 +103,36 @@ public class ListActivity extends AppCompatActivity {
 
         });
 
-        vh.themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        AdapterView.OnItemSelectedListener filterListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position>0){
-                    String selectedItem = parentView.getItemAtPosition(position).toString();
-                    fetchProductsByFilter("theme", selectedItem.toLowerCase());
-                } else {
+                HashMap<String, String> filters = new HashMap<>();
+
+                if (!vh.themeSpinner.getSelectedItem().toString().equals(getString(R.string.theme_title))) {
+                    filters.put("theme", vh.themeSpinner.getSelectedItem().toString());
+                }
+
+                if (!vh.colourSpinner.getSelectedItem().toString().equals(getString(R.string.colour_title))) {
+                    filters.put("mainColour", vh.colourSpinner.getSelectedItem().toString());
+                }
+
+                // If filters have been set and then reset, will repopulate products list with initial products loading
+                if (filters.isEmpty() && (!productsList.equals(allProducts))) {
                     productsList.clear();
                     productsList.addAll(allProducts);
                     adapter.notifyDataSetChanged();
+                } else if (!filters.isEmpty()) {
+                    fetchProductsByFilterSet(filters); // Will filter based on theme and colour
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {}
+        };
 
-        });
+        vh.themeSpinner.setOnItemSelectedListener(filterListener);
+        vh.colourSpinner.setOnItemSelectedListener(filterListener);
 
-        vh.colourSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position>0){
-                    String selectedItem = parentView.getItemAtPosition(position).toString();
-                    fetchProductsByFilter("mainColour", selectedItem.toLowerCase());
-                } else {
-                    productsList.clear();
-                    productsList.addAll(allProducts);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {}
-        });
     }
 
     /**
@@ -160,7 +156,7 @@ public class ListActivity extends AppCompatActivity {
                 // Dynamically setting filters based off of available products in category
                 priceFilter.setFilterSpinner(this, R.array.price_filters);
                 themeFilter.setFilterSpinnerDynamic(this, productsList, "theme");
-                colourFilter.setFilterSpinnerDynamic(this, productsList, "colour");
+                colourFilter.setFilterSpinnerDynamic(this, productsList, "mainColour");
 
                 // Saving an instance of all the products for filtering
                 allProducts.addAll(productsList);
@@ -215,36 +211,72 @@ public class ListActivity extends AppCompatActivity {
     }
 
     /**
-     * Repopulates product adapter with products filtered by given filter
+     * Repopulates product adapter with products filtered
      *
-     * @param  filterType which field to filter on - theme, mainColour
-     * @param  filterValue the value to match
+     * @param  filters  hashmap of <filterType, filterValue>
      */
-    public void fetchProductsByFilter(String filterType, String filterValue) {
+    private void fetchProductsByFilterSet(HashMap<String,String> filters) {
         List<IProduct> filteredProducts = new LinkedList<>();
-        productsList.clear(); // clears the view
+        productsList.clear(); // Clears the adapter
 
-        for (IProduct product : allProducts) {
-            if (filterType.equals("theme")) {
-                if (product.getTheme().equals(filterValue)){
-                    filteredProducts.add(product);
-                }
-            } else if (filterType.equals("mainColour")) {
-                if (product.getMainColour().equals(filterValue)){
-                    filteredProducts.add(product);
-                }
+        boolean multipleFilters = (filters.size() > 1);
+
+        // If multiple filters, will combine filters (filter a && filter b)
+        if (multipleFilters) {
+            List<IProduct> tempFilteredProducts = filterByTheme(allProducts, filters.get("theme"));
+            filteredProducts = filterByColour(tempFilteredProducts, filters.get("mainColour"));
+        } else if (((String)filters.keySet().toArray()[0]).equals("theme")){
+            filteredProducts = filterByTheme(allProducts, filters.get("theme"));
+        } else if (((String)filters.keySet().toArray()[0]).equals("mainColour")){
+            filteredProducts = filterByColour(allProducts, filters.get("mainColour"));
+        }
+
+        // Repopulating adapter
+        productsList.addAll(filteredProducts);
+        adapter.notifyDataSetChanged();
+
+        if (productsList.size() == 0) {
+            Toast.makeText(getBaseContext(), "No products match filter", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    /**
+     * Filters list of products by theme
+     *
+     * @param  listToFilter  list of products to apply filter on>
+     * @param  filterValue  value to filter on>
+     * @return List<IProduct> filtered list
+     */
+    private List<IProduct> filterByTheme(List<IProduct> listToFilter, String filterValue) {
+        filterValue = filterValue.toLowerCase();
+        List<IProduct> filteredList = new LinkedList<>();
+        for (IProduct product : listToFilter) {
+            if (product.getTheme().equals(filterValue)) {
+                filteredList.add(product);
             }
         }
 
-        productsList.addAll(filteredProducts);
-        adapter.notifyDataSetChanged();
-        vh.progressBar.setVisibility(View.GONE);
+        return filteredList;
+    }
 
-        if (productsList.size() > 0) {
-            Toast.makeText(getBaseContext(), "Filter successful.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getBaseContext(), "No Products Fit Filter", Toast.LENGTH_LONG).show();
+    /**
+     * Filters list of products by theme
+     *
+     * @param  listToFilter  list of products to apply filter on>
+     * @param  filterValue  value to filter on>
+     * @return List<IProduct> filtered list
+     */
+    private List<IProduct> filterByColour(List<IProduct> listToFilter, String filterValue) {
+        filterValue = filterValue.toLowerCase();
+        List<IProduct> filteredList = new LinkedList<>();
+        for (IProduct product : listToFilter) {
+            if (product.getMainColour().equals(filterValue)) {
+                filteredList.add(product);
+            }
         }
+
+        return filteredList;
     }
 
     public void showMain(View v) {

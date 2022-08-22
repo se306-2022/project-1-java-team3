@@ -5,5 +5,8 @@
         <item>Price Asc</item>
         <item>Price Desc</item>
     </string-array>
+
+    <string name="theme_title">Filter By Theme</string>
+    <string name="colour_title">Filter By Colour</string>
 </resources>
 
