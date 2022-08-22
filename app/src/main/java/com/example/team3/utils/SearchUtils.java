@@ -1,7 +1,5 @@
 package com.example.team3.utils;
 
-import android.view.View;
-
 import com.example.team3.models.product.IProduct;
 
 import java.util.LinkedList;

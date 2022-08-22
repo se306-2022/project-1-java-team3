@@ -32,7 +32,8 @@
                     android:background="@color/lightGray"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
+                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:contentDescription="Back button to navigate to previous activity" />
 
                 <android.widget.SearchView
                     android:id="@+id/search_bar"
@@ -48,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:text="LOADING..."
                 android:layout_gravity="center"
-                android:textSize="24dp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/gold"
                 android:layout_marginTop="8dp"
