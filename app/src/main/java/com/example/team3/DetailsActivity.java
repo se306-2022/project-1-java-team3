@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.team3.adapters.ProductAdapter;
 import com.example.team3.models.product.IProduct;
+import com.example.team3.utils.FirestoreUtils;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
@@ -70,23 +71,10 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void incrementViewCount() {
-        CollectionReference ref;
-
-        switch(getIntent().getExtras().getString("type")) {
-            case "painting":
-                ref = db.collection("Paintings");
-                break;
-            case "digital":
-                ref = db.collection("Digital");
-                break;
-            case "photo":
-                ref = db.collection("Photos");
-                break;
-            default:
-                return;
-        }
-
+        String type = getIntent().getExtras().getString("type");
         String documentId = getIntent().getExtras().getString("id");
+
+        CollectionReference ref = FirestoreUtils.getCollectionReference(type);
         ref.document(documentId).update("viewCount", FieldValue.increment(1));
     }
 

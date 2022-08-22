@@ -15,4 +15,6 @@ public interface IProduct {
     int getViewCount();
     String getCategory();
     boolean getLiked();
+
+    void setLiked(boolean liked);
 }

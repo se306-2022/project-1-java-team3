@@ -96,4 +96,9 @@ public class Product implements IProduct {
     public boolean getLiked() {
         return liked;
     }
+
+    @Override
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
 }
