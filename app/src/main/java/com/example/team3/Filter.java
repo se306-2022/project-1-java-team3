@@ -40,13 +40,13 @@ public class Filter {
      * @param  type filter type - implemented for theme and colour
      */
     public void setFilterSpinnerDynamic(Context c, List<IProduct> productsList, String type) {
-        Set<String> set = new HashSet<>();
+        Set<String> set = new HashSet<String>();
         String currentProduct="";
 
         for (IProduct product : productsList) {
             if (type.equals("theme")) {
                 currentProduct = product.getTheme();
-            } else if (type.equals("colour")) {
+            } else if (type.equals("mainColour")) {
                 currentProduct = product.getMainColour();
             }
             set.add(currentProduct.substring(0, 1).toUpperCase() + currentProduct.substring(1));
@@ -54,9 +54,9 @@ public class Filter {
 
         ArrayList<String> options = new ArrayList<>(set);
         if (type.equals("theme")) {
-            options.add(0, "Filter By Theme");
-        } else if (type.equals("colour")) {
-            options.add(0, "Filter By Colour");
+            options.add(0, c.getString(R.string.theme_title));
+        } else if (type.equals("mainColour")) {
+            options.add(0, c.getString(R.string.colour_title));
         }
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<> (c, R.layout.filter_spinner_item, options);

@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="price_title">Sort By Price</string>
+    <string name="asc">Low to High</string>
+    <string name="desc">High to Low</string>
+
+
     <string-array name="price_filters">
-        <item>Sort By Price</item>
-        <item>Price Asc</item>
-        <item>Price Desc</item>
+        <item>@string/price_title</item>
+        <item>@string/asc</item>
+        <item>@string/desc</item>
     </string-array>
+
+    <string name="theme_title">Filter By Theme</string>
+    <string name="colour_title">Filter By Colour</string>
 </resources>
 
