@@ -33,7 +33,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
-                    android:onClick="showMain"/>
+                    />
 
                 <android.widget.SearchView
                     android:id="@+id/search_bar"

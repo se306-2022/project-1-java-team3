@@ -13,11 +13,9 @@ import com.example.team3.adapters.ProductAdapter;
 import com.example.team3.data.DataProvider;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Product;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
