@@ -204,7 +204,6 @@ public class ListActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
 
                 vh.progressBar.setVisibility(View.GONE);
-                Toast.makeText(getBaseContext(), "Loading products successful.", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getBaseContext(), "Loading products failed.", Toast.LENGTH_LONG).show();
             }
