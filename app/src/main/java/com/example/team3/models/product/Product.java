@@ -15,9 +15,11 @@ public class Product implements IProduct {
     private String description;
     private int viewCount;
     private String category;
+    private boolean liked;
 
     public Product(int id, String name, String artist, int year, List<String> images, int price,
-                   String mainColour, String theme, String description, int viewCount, String category) {
+                   String mainColour, String theme, String description, int viewCount,
+                   String category, boolean liked) {
         this.id = id;
         this.name = name;
         this.artist = artist;
@@ -29,12 +31,16 @@ public class Product implements IProduct {
         this.viewCount = viewCount;
         this.year = year;
         this.category = category;
+        this.liked = liked;
     }
 
-    public Product() {}
+    public Product() {
+    }
 
     @Override
-    public int getYear() {return year;}
+    public int getYear() {
+        return year;
+    }
 
     @Override
     public int getId() {
@@ -84,5 +90,10 @@ public class Product implements IProduct {
     @Override
     public String getCategory() {
         return category;
+    }
+
+    @Override
+    public boolean getLiked() {
+        return liked;
     }
 }

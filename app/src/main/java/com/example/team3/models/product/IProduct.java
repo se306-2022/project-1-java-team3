@@ -14,4 +14,5 @@ public interface IProduct {
     String getDescription();
     int getViewCount();
     String getCategory();
+    boolean getLiked();
 }
