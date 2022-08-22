@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query.Direction;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -78,9 +81,9 @@ public class ListActivity extends AppCompatActivity {
         // Initialising filters
         priceFilter = new Filter(vh.priceSpinner);
         themeFilter = new Filter(vh.themeSpinner);
+        colourFilter = new Filter(vh.colourSpinner);
 
         // Initialising product list in recycler view
-        colourFilter = new Filter(vh.colourSpinner);
         productsList = new LinkedList<>();
         allProducts = new LinkedList<>();
         adapter = new ProductAdapter(productsList);
@@ -93,8 +96,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position>0){
-                    String selectedItem = parentView.getItemAtPosition(position).toString();
-                    fetchPriceSortedProductsData(category, selectedItem);
+                    sortProductList(vh.priceSpinner.getSelectedItem().toString());
                 }
             }
 
@@ -107,6 +109,11 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 HashMap<String, String> filters = new HashMap<>();
+                String sort="";
+
+                if (!vh.priceSpinner.getSelectedItem().toString().equals(getString(R.string.price_title))) {
+                    sort = vh.priceSpinner.getSelectedItem().toString();
+                }
 
                 if (!vh.themeSpinner.getSelectedItem().toString().equals(getString(R.string.theme_title))) {
                     filters.put("theme", vh.themeSpinner.getSelectedItem().toString());
@@ -120,9 +127,16 @@ public class ListActivity extends AppCompatActivity {
                 if (filters.isEmpty() && (!productsList.equals(allProducts))) {
                     productsList.clear();
                     productsList.addAll(allProducts);
-                    adapter.notifyDataSetChanged();
+                    if (sort.length()>0) {
+                        sortProductList(sort);
+                    } else {
+                        adapter.notifyDataSetChanged();
+                    }
                 } else if (!filters.isEmpty()) {
                     fetchProductsByFilterSet(filters); // Will filter based on theme and colour
+                    if (sort.length()>0) {
+                        sortProductList(sort);
+                    }
                 }
             }
 
@@ -171,43 +185,19 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Repopulates product adapter with products sorted in a given order
-     *
-     * @param  category  current category showing on list view
-     * @param  order ascending or descending
-     */
-    private void fetchPriceSortedProductsData(String category, String order) {
-        productsList.clear(); // clears the view
-        
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private void sortProductList(String direction) {
+        Collections.sort(productsList,
+                new Comparator<IProduct>() {
+                    @Override public int compare(IProduct p1, IProduct p2) {
+                        return p1.getPrice() - p2.getPrice();
+                    }
+                });
 
-        // Setting the direction of sort
-        Direction direction;
-        if (order.equals("Price Asc")){
-            direction = Direction.ASCENDING;
-        } else {
-            direction = Direction.DESCENDING;
+        if (direction.equals(getString(R.string.desc))){
+            Collections.reverse(productsList);
         }
 
-        db.collection(category).orderBy("price", direction).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                if (category.equals("Painting")) {
-                    productsList.addAll(task.getResult().toObjects(Painting.class));
-                } else if (category.equals("Photo")) {
-                    productsList.addAll(task.getResult().toObjects(Photo.class));
-                } else {
-                    productsList.addAll(task.getResult().toObjects(Digital.class));
-                }
-
-                adapter.notifyDataSetChanged();
-
-                vh.progressBar.setVisibility(View.GONE);
-                Toast.makeText(getBaseContext(), "Loading products successful.", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getBaseContext(), "Loading products failed.", Toast.LENGTH_LONG).show();
-            }
-        });
+        adapter.notifyDataSetChanged();
     }
 
     /**
