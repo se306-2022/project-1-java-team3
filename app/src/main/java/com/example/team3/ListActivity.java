@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
@@ -14,10 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query.Direction;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -187,11 +184,7 @@ public class ListActivity extends AppCompatActivity {
 
     private void sortProductList(String direction) {
         Collections.sort(productsList,
-                new Comparator<IProduct>() {
-                    @Override public int compare(IProduct p1, IProduct p2) {
-                        return p1.getPrice() - p2.getPrice();
-                    }
-                });
+                (p1, p2) -> p1.getPrice() - p2.getPrice());
 
         if (direction.equals(getString(R.string.desc))){
             Collections.reverse(productsList);
