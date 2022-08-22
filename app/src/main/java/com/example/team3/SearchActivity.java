@@ -3,7 +3,6 @@ package com.example.team3;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,10 +15,8 @@ import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Product;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -49,6 +46,8 @@ public class SearchActivity extends AppCompatActivity {
 
         vh = new ViewHolder();
 
+        vh.searchBar.setQueryHint("Search All Products");
+
         productsList = new LinkedList<>();
         allProducts = new LinkedList<>();
         adapter = new ProductAdapter(productsList);
@@ -72,12 +71,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        vh.backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        vh.backButton.setOnClickListener(view -> finish());
     }
 
     private void getProductsBySearch(List<IProduct> productsToSearch, String query) {
