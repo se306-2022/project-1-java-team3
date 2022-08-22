@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.team3.adapters.ProductAdapter;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Product;
+import com.example.team3.utils.SearchUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.LinkedList;
@@ -58,32 +59,26 @@ public class SearchActivity extends AppCompatActivity {
         vh.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                getProductsBySearch(allProducts, query);
                 vh.searchBar.clearFocus();
+                productsList.clear();
+                productsList.addAll(SearchUtils.getProductsBySearch(allProducts, query));
+                vh.progressBar.setVisibility(View.GONE);
+                adapter.notifyDataSetChanged();
 
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                getProductsBySearch(allProducts, query);
+                productsList.clear();
+                productsList.addAll(SearchUtils.getProductsBySearch(allProducts, query));
+                vh.progressBar.setVisibility(View.GONE);
+                adapter.notifyDataSetChanged();
                 return false;
             }
         });
 
         vh.backButton.setOnClickListener(view -> finish());
-    }
-
-    private void getProductsBySearch(List<IProduct> productsToSearch, String query) {
-        productsList.clear();
-        query = query.trim().toLowerCase();
-        for (IProduct product : productsToSearch) {
-            if (product.getName().toLowerCase().contains(query)) {
-                productsList.add(product);
-            }
-        }
-        vh.progressBar.setVisibility(View.GONE);
-        adapter.notifyDataSetChanged();
     }
 
 
