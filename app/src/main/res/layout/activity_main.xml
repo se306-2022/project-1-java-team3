@@ -111,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/gold"
-                android:text="OIL PAINTINGS"
+                android:text="PAINTINGS"
                 android:textAlignment="textStart"
                 android:onClick="showPaintings"
                 android:textSize="16dp"

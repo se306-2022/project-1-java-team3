@@ -18,7 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.team3.DetailsActivity;
 import com.example.team3.R;
+import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
+import com.example.team3.models.product.Painting;
+import com.example.team3.models.product.Photo;
 import com.example.team3.models.product.Product;
 import com.example.team3.utils.FirestoreUtils;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,7 +36,7 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameTextView, priceTextView, descriptionTextView;
+        public TextView nameTextView, priceTextView, descriptionTextView, extraDetails;
         public ImageView imageView;
         private CardView layout;
         private LikeButton likeButton;
@@ -46,6 +49,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             descriptionTextView = view.findViewById(R.id.product_artist);
             imageView = view.findViewById(R.id.product_image);
             likeButton = view.findViewById(R.id.card_like_button);
+            extraDetails = view.findViewById(R.id.product_extra);
         }
     }
 
@@ -75,6 +79,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.priceTextView.setText(product.getPrice() + " USD");
         holder.descriptionTextView.setText(product.getArtist());
         holder.likeButton.setLiked(product.getLiked());
+        if (product instanceof Painting) {
+            holder.extraDetails.setText("Medium: " + product.getMedium());
+        } else if (product instanceof Photo) {
+            holder.extraDetails.setText("Captured with " + product.getCamera());
+        } else if (product instanceof Digital) {
+            holder.extraDetails.setText("Blockchain: " + product.getBlockchain());
+        }
 
         String firstImageUrl = product.getImages().get(0);
         if (firstImageUrl != null) {

@@ -194,9 +194,9 @@ public class ListActivity extends AppCompatActivity {
 
         db.collection(category).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                if (category.equals("Painting")) {
+                if (category.equals("Paintings")) {
                     productsList.addAll(task.getResult().toObjects(Painting.class));
-                } else if (category.equals("Photo")) {
+                } else if (category.equals("Photos")) {
                     productsList.addAll(task.getResult().toObjects(Photo.class));
                 } else if (category.equals("Digital")){
                     productsList.addAll(task.getResult().toObjects(Digital.class));
