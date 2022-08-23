@@ -1,41 +1,15 @@
 package com.example.team3.models.product;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.util.List;
 
 public class Product implements IProduct {
 
-    private int id;
-    private int year;
-    private String name;
-    private String artist;
-    private List<String> images;
-    private int price;
-    private String mainColour;
-    private String theme;
-    private String description;
-    private int viewCount;
-    private String category;
-    private boolean liked;
-
-    public Product(int id, String name, String artist, int year, List<String> images, int price,
-                   String mainColour, String theme, String description, int viewCount,
-                   String category, boolean liked) {
-        this.id = id;
-        this.name = name;
-        this.artist = artist;
-        this.images = images;
-        this.price = price;
-        this.mainColour = mainColour;
-        this.theme = theme;
-        this.description = description;
-        this.viewCount = viewCount;
-        this.year = year;
-        this.category = category;
-        this.liked = liked;
-    }
-
-    public Product() {
-    }
+    protected int id, year, price, viewCount;
+    protected String name, artist, mainColour, theme, description, category;
+    protected List<String> images;
+    protected boolean liked;
 
     @Override
     public int getYear() {
@@ -100,5 +74,27 @@ public class Product implements IProduct {
     @Override
     public void setLiked(boolean liked) {
         this.liked = liked;
+    }
+
+    // Category specific methods:
+
+    @Exclude
+    public String getMedium() {
+        throw new RuntimeException(this.getClass().getSimpleName() + " doesn't have this method");
+    }
+
+    @Exclude
+    public String getCamera() {
+        throw new RuntimeException(this.getClass().getSimpleName() + " doesn't have this method");
+    }
+
+    @Exclude
+    public String getBlockchain() {
+        throw new RuntimeException(this.getClass().getSimpleName() + " doesn't have this method");
+    }
+
+    @Exclude
+    public String getTokenId() {
+        throw new RuntimeException(this.getClass().getSimpleName() + " doesn't have this method");
     }
 }
