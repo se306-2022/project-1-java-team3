@@ -22,6 +22,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.Collection;
@@ -36,6 +38,7 @@ public class DetailsActivity extends AppCompatActivity {
         public TextView productPrice;
         public ImageView productImage;
         public SliderView sliderView;
+        public LikeButton likeButton;
 
         public ViewHolder() {
             productName = findViewById(R.id.productName);
@@ -44,6 +47,7 @@ public class DetailsActivity extends AppCompatActivity {
             productPrice = findViewById(R.id.productPrice);
             productImage = findViewById(R.id.productImage);
             sliderView = findViewById(R.id.details_slider_view);
+            likeButton = findViewById(R.id.details_like_button);
         }
     }
 
@@ -63,6 +67,21 @@ public class DetailsActivity extends AppCompatActivity {
         vh.productDesc.setText(product.getDescription());
         vh.productPrice.setText(product.getPrice() + " USD");
         vh.sliderView.setSliderAdapter(new SliderAdapter(this, product.getImages()));
+        vh.likeButton.setLiked(product.getLiked());
+
+        vh.likeButton.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                product.setLiked(true);
+                FirestoreUtils.addProductToFavourites(product);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                product.setLiked(false);
+                FirestoreUtils.removeProductFromFavourites(product);
+            }
+        });
 
         incrementViewCount();
     }

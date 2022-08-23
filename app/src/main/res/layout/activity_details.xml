@@ -34,7 +34,7 @@
                     app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
                 <com.like.LikeButton
-                    android:id="@+id/card_like_button"
+                    android:id="@+id/details_like_button"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"

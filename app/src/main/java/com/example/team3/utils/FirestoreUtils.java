@@ -1,5 +1,6 @@
 package com.example.team3.utils;
 
+import com.example.team3.models.product.IProduct;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -18,5 +19,35 @@ public class FirestoreUtils {
             default:
                 return null;
         }
+    }
+
+    /**
+     * Helper method to add product to favourites collection.
+     * @param product IProduct model.
+     */
+    public static void addProductToFavourites(IProduct product) {
+        CollectionReference ref = getCollectionReference(product.getCategory());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        ref.document(String.valueOf(product.getId())).update("liked", true)
+                .addOnSuccessListener(unused ->
+                        db.collection("Favourites")
+                                .document(String.valueOf(product.getId())).set(product)
+                                .addOnFailureListener(Throwable::printStackTrace)
+                );
+    }
+
+    /**
+     * Helper method to remove product from favourites collection.
+     * @param product IProduct model.
+     */
+    public static void removeProductFromFavourites(IProduct product) {
+        CollectionReference ref = FirestoreUtils.getCollectionReference(product.getCategory());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        ref.document(String.valueOf(product.getId())).update("liked", false)
+                .addOnSuccessListener(unused ->
+                        db.collection("Favourites")
+                                .document(String.valueOf(product.getId())).delete()
+                                .addOnFailureListener(Throwable::printStackTrace)
+                );
     }
 }

@@ -80,6 +80,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.priceTextView.setText(product.getPrice() + " USD");
         holder.descriptionTextView.setText(product.getArtist());
         holder.likeButton.setLiked(product.getLiked());
+
         if (product instanceof Painting) {
             holder.extraDetails.setText("Medium: " + product.getMedium());
         } else if (product instanceof Photo) {
@@ -89,20 +90,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
 
         String firstImageUrl = product.getImages().get(0);
-        if (firstImageUrl != null) {
-            Glide.with(context).load(firstImageUrl).into(holder.imageView);
-        }
+        Glide.with(context).load(firstImageUrl).into(holder.imageView);
 
         holder.layout.setOnClickListener(v -> startDetailsActivity(v, product));
         holder.likeButton.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                addProductToFavourites(product);
+                product.setLiked(true);
+                FirestoreUtils.addProductToFavourites(product);
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
-                removeProductFromFavourites(product);
+                product.setLiked(false);
+                FirestoreUtils.removeProductFromFavourites(product);
             }
         });
     }
@@ -110,40 +111,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public int getItemCount() {
         return products.size();
-    }
-
-    /**
-     * Helper method to add product to favourites collection.
-     * @param product IProduct model.
-     */
-    private void addProductToFavourites(IProduct product) {
-        product.setLiked(true);
-
-        CollectionReference ref = FirestoreUtils.getCollectionReference(product.getCategory());
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ref.document(String.valueOf(product.getId())).update("liked", true)
-                .addOnSuccessListener(unused ->
-                        db.collection("Favourites")
-                                .document(String.valueOf(product.getId())).set(product)
-                                .addOnFailureListener(Throwable::printStackTrace)
-                );
-    }
-
-    /**
-     * Helper method to remove product from favourites collection.
-     * @param product IProduct model.
-     */
-    private void removeProductFromFavourites(IProduct product) {
-        product.setLiked(false);
-
-        CollectionReference ref = FirestoreUtils.getCollectionReference(product.getCategory());
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ref.document(String.valueOf(product.getId())).update("liked", false)
-                .addOnSuccessListener(unused ->
-                        db.collection("Favourites")
-                                .document(String.valueOf(product.getId())).delete()
-                                .addOnFailureListener(Throwable::printStackTrace)
-                );
     }
 
     /**
