@@ -3,6 +3,7 @@ package com.example.team3;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -152,7 +153,10 @@ public class ListActivity extends AppCompatActivity {
         vh.themeSpinner.setOnItemSelectedListener(filterListener);
         vh.colourSpinner.setOnItemSelectedListener(filterListener);
 
-        vh.backButton.setOnClickListener(view -> finish());
+        vh.backButton.setOnClickListener(view -> {
+            Intent mainIntent = new Intent(this, MainActivity.class);
+            startActivity(mainIntent);
+        });
 
         vh.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

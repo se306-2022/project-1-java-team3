@@ -19,20 +19,29 @@
             android:background="@color/lightGray"
             android:elevation="5dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/back_button"
-                    android:background="@color/lightGray"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
-                    android:onClick="showMain"/>
+                    android:background="@color/lightGray"
+                    android:onClick="showMain"
+                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
-            </LinearLayout>
+                <com.like.LikeButton
+                    android:id="@+id/card_like_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    app:icon_size="8dp"
+                    app:icon_type="heart" />
+
+            </RelativeLayout>
 
             <ImageView
                 android:layout_width="200dp"
@@ -51,33 +60,47 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/productName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="LOADING..."
                 android:textColor="@color/gray"
                 android:textSize="28dp"
-                android:textStyle="bold"
-                android:id="@+id/productName"/>
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/productCreator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Loading..."
                 android:textColor="@color/gray"
-                android:textSize="12dp"
-                android:id="@+id/productCreator"/>
+                android:textSize="12dp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="History"
-                android:textColor="@color/gray"
-                android:textSize="16dp"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"/>
+                android:orientation="vertical"
+                android:paddingLeft="6dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Description"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/gray"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="25dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gold"/>
+
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -97,6 +120,30 @@
 
             </androidx.cardview.widget.CardView>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="6dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Additional Information"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/gray"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="25dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gold"/>
+
+            </LinearLayout>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,7 +151,25 @@
                 app:cardCornerRadius="10dp"
                 app:cardUseCompatPadding="true">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/additional_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Additional information"
+                    android:textColor="@color/gray"
+                    android:textSize="14dp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/lightGray"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
@@ -112,12 +177,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="10dp"
                         android:text="Add to favourites"
                         android:textColor="@color/gold"
-                        android:textSize="14dp"
-                        android:padding="10dp"/>
+                        android:textSize="14dp" />
 
                     <TextView
+                        android:id="@+id/productPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
@@ -126,9 +192,9 @@
                         android:textColor="@color/red"
                         android:textSize="14dp"
                         android:textStyle="bold"
-                        android:id="@+id/productPrice"/>
+                        android:layout_alignParentEnd="true"/>
 
-                </LinearLayout>
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
         </LinearLayout>
