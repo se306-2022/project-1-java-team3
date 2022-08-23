@@ -15,8 +15,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.team3.adapters.ProductAdapter;
 import com.example.team3.adapters.SliderAdapter;
+import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Painting;
+import com.example.team3.models.product.Photo;
 import com.example.team3.utils.FirestoreUtils;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -35,6 +37,7 @@ public class DetailsActivity extends AppCompatActivity {
         public TextView productName;
         public TextView productArtist;
         public TextView productDesc;
+        public TextView productAddInfo;
         public TextView productPrice;
         public ImageView productImage;
         public SliderView sliderView;
@@ -44,6 +47,7 @@ public class DetailsActivity extends AppCompatActivity {
             productName = findViewById(R.id.productName);
             productArtist = findViewById(R.id.productCreator);
             productDesc = findViewById(R.id.productDesc);
+            productAddInfo = findViewById(R.id.productAddInfo);
             productPrice = findViewById(R.id.productPrice);
             productImage = findViewById(R.id.productImage);
             sliderView = findViewById(R.id.details_slider_view);
@@ -68,6 +72,14 @@ public class DetailsActivity extends AppCompatActivity {
         vh.productPrice.setText(product.getPrice() + " USD");
         vh.sliderView.setSliderAdapter(new SliderAdapter(this, product.getImages()));
         vh.likeButton.setLiked(product.getLiked());
+
+        if (product instanceof Painting) {
+            vh.productAddInfo.setText("Medium: " + product.getMedium());
+        } else if (product instanceof Photo) {
+            vh.productAddInfo.setText("Captured with " + product.getCamera());
+        } else if (product instanceof Digital) {
+            vh.productAddInfo.setText("Blockchain: " + product.getBlockchain());
+        }
 
         vh.likeButton.setOnLikeListener(new OnLikeListener() {
             @Override
