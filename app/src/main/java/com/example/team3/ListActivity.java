@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -58,7 +59,7 @@ public class ListActivity extends AppCompatActivity {
     private ProductAdapter adapter;
     private List<IProduct> productsList;
     private List<IProduct> allProducts;
-
+    private List<IProduct> currentProductsShowing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +135,7 @@ public class ListActivity extends AppCompatActivity {
                         FilterUtils.applyFiltersAndSort(productsList, allProducts, filters, sort));
                 productsList.clear();
                 productsList.addAll(filteredAndSorted);
+                currentProductsShowing = new LinkedList<>(productsList);
                 adapter.notifyDataSetChanged();
 
                 // If filter set is applied and no results, gives message
@@ -163,7 +165,7 @@ public class ListActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String s) {
                 vh.searchBar.clearFocus();
                 productsList.clear();
-                productsList.addAll(SearchUtils.getProductsBySearch(allProducts, s));
+                productsList.addAll(SearchUtils.getProductsBySearch(currentProductsShowing, s));
                 adapter.notifyDataSetChanged();
                 vh.progressBar.setVisibility(View.GONE);
                 return false;
@@ -173,9 +175,14 @@ public class ListActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 productsList.clear();
                 if (s.length() == 0) {
-                    productsList.addAll(allProducts);
+                    productsList.addAll(currentProductsShowing);
                 } else {
-                    productsList.addAll(SearchUtils.getProductsBySearch(allProducts, s));
+                    productsList.addAll(SearchUtils.getProductsBySearch(currentProductsShowing, s));
+                }
+
+                // If filter set is applied and no results, gives message
+                if (productsList.size()==0) {
+                    Toast.makeText(getBaseContext(), "No products match search.", Toast.LENGTH_LONG).show();
                 }
 
                 adapter.notifyDataSetChanged();
