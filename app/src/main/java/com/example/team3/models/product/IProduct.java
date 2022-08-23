@@ -1,8 +1,9 @@
 package com.example.team3.models.product;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface IProduct {
+public interface IProduct extends Serializable {
     // Applies to all categories.
     int getId();
     String getName();

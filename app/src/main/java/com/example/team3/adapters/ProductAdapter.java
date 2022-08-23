@@ -31,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
@@ -152,13 +153,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
      */
     private void startDetailsActivity(View v, IProduct product) {
         Intent detailsIntent = new Intent(v.getContext(), DetailsActivity.class);
-        detailsIntent.putExtra("name", product.getName());
-        detailsIntent.putExtra("artist", product.getArtist());
-        detailsIntent.putExtra("description", product.getDescription());
-        detailsIntent.putExtra("price", String.valueOf(product.getPrice()));
-        detailsIntent.putExtra("image", product.getImages().get(0));
-        detailsIntent.putExtra("type", product.getCategory());
-        detailsIntent.putExtra("id", String.valueOf(product.getId()));
+        detailsIntent.putExtra("product", product);
         v.getContext().startActivity(detailsIntent);
     }
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.team3.adapters.ProductAdapter;
 import com.example.team3.models.product.IProduct;
+import com.example.team3.models.product.Painting;
 import com.example.team3.utils.FirestoreUtils;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -44,35 +45,34 @@ public class DetailsActivity extends AppCompatActivity {
 
     private DetailsActivity.ViewHolder vh;
     private Context context;
-    private FirebaseFirestore db;
+    private IProduct product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        product = (IProduct) getIntent().getSerializableExtra("product");
+
         vh = new ViewHolder();
-        vh.productName.setText(getIntent().getExtras().getString("name"));
-        vh.productArtist.setText("Created by " + getIntent().getExtras().getString("artist"));
-        vh.productDesc.setText(getIntent().getExtras().getString("description"));
-        vh.productPrice.setText(getIntent().getExtras().getString("price") + " USD");
+        vh.productName.setText(product.getName());
+        vh.productArtist.setText("Created by " + product.getArtist());
+        vh.productDesc.setText(product.getDescription());
+        vh.productPrice.setText(product.getPrice() + " USD");
 
         setImages();
-
-        db = FirebaseFirestore.getInstance();
-
         incrementViewCount();
     }
 
     private void setImages() {
-        String imageUrl = getIntent().getExtras().getString("image");
+        String imageUrl = product.getImages().get(0);
         Glide.with(this).load(imageUrl).into(vh.productImage);
         // TODO do for multiple images. Intents can hold array values I think.
     }
 
     public void incrementViewCount() {
-        String type = getIntent().getExtras().getString("type");
-        String documentId = getIntent().getExtras().getString("id");
+        String type = product.getCategory();
+        String documentId = String.valueOf(product.getId());
 
         CollectionReference ref = FirestoreUtils.getCollectionReference(type);
         ref.document(documentId).update("viewCount", FieldValue.increment(1));
