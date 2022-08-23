@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.team3.adapters.ProductAdapter;
+import com.example.team3.adapters.SliderAdapter;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Painting;
 import com.example.team3.utils.FirestoreUtils;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.Collection;
 import java.util.List;
@@ -33,6 +35,7 @@ public class DetailsActivity extends AppCompatActivity {
         public TextView productDesc;
         public TextView productPrice;
         public ImageView productImage;
+        public SliderView sliderView;
 
         public ViewHolder() {
             productName = findViewById(R.id.productName);
@@ -40,11 +43,11 @@ public class DetailsActivity extends AppCompatActivity {
             productDesc = findViewById(R.id.productDesc);
             productPrice = findViewById(R.id.productPrice);
             productImage = findViewById(R.id.productImage);
+            sliderView = findViewById(R.id.details_slider_view);
         }
     }
 
     private DetailsActivity.ViewHolder vh;
-    private Context context;
     private IProduct product;
 
     @Override
@@ -59,15 +62,9 @@ public class DetailsActivity extends AppCompatActivity {
         vh.productArtist.setText("Created by " + product.getArtist());
         vh.productDesc.setText(product.getDescription());
         vh.productPrice.setText(product.getPrice() + " USD");
+        vh.sliderView.setSliderAdapter(new SliderAdapter(this, product.getImages()));
 
-        setImages();
         incrementViewCount();
-    }
-
-    private void setImages() {
-        String imageUrl = product.getImages().get(0);
-        Glide.with(this).load(imageUrl).into(vh.productImage);
-        // TODO do for multiple images. Intents can hold array values I think.
     }
 
     public void incrementViewCount() {

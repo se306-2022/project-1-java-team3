@@ -22,7 +22,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <ImageButton
                     android:id="@+id/back_button"
@@ -47,8 +48,27 @@
                 android:layout_width="200dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
-                android:id="@+id/productImage">
+                android:id="@+id/productImage"
+                android:visibility="gone">
             </ImageView>
+
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/details_slider_view"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                app:sliderAnimationDuration="1000"
+                app:sliderAutoCycleDirection="right"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorAnimationDuration="1000"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#5A5A5A"
+                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderScrollTimeInSec="2"
+                app:sliderStartAutoCycle="true" />
 
 
         </LinearLayout>
