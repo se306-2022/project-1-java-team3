@@ -27,6 +27,7 @@ import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Painting;
 import com.example.team3.models.product.Photo;
 import com.example.team3.models.product.Digital;
+import com.example.team3.models.product.Product;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -76,9 +77,13 @@ public class ListActivity extends AppCompatActivity {
         } else if (Objects.equals(category, "Paintings")) {
             vh.headerText.setText(R.string.Paintings);
             vh.searchBar.setQueryHint("Search " + getString(R.string.Paintings).toLowerCase());
-        } else {
+        } else if (Objects.equals(category, "Digital")) {
             vh.headerText.setText(R.string.Digital);
             vh.searchBar.setQueryHint("Search " + getString(R.string.Digital).toLowerCase());
+        } else {
+            vh.headerText.setText("FAVOURITES");
+            vh.searchBar.setQueryHint("Search Favourites");
+
         }
 
         // Initialising product list in recycler view
@@ -189,8 +194,10 @@ public class ListActivity extends AppCompatActivity {
                     productsList.addAll(task.getResult().toObjects(Painting.class));
                 } else if (category.equals("Photo")) {
                     productsList.addAll(task.getResult().toObjects(Photo.class));
-                } else {
+                } else if (category.equals("Digital")){
                     productsList.addAll(task.getResult().toObjects(Digital.class));
+                } else {
+                    productsList.addAll(task.getResult().toObjects(Product.class));
                 }
 
                 // Dynamically setting filters based off of available products in category

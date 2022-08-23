@@ -99,6 +99,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(listIntent);
     }
 
+    public void showFavourites(View v) {
+        Intent listIntent = new Intent(this, ListActivity.class);
+        listIntent.putExtra("key","Favourites");
+        startActivity(listIntent);
+    }
+
     public void showSearch(View v) {
         Intent searchIntent = new Intent(this, SearchActivity.class);
         startActivity(searchIntent);
