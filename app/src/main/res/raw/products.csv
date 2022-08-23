@@ -1,30 +1,30 @@
-painting,1,Monsieur Madame,Julian Denzil,1534,5000000,white,romance,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,2,Gate of the Gods,Michael Angelo,1468,24000000,blue,war,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,3,Princess Rosetta,Leonardo Davinci,1834,18000000,white,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,4,River Bank Rome,Casper David,1438,12000000,green,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,5,Explorers of Yore,William Blake,1768,8000000,green,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,6,Mona Lisa,Leonardo da Vinci,1596,900000000,yellow,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,7,Wreck of the Endeavour,Hector Lazarus,1613,4500000,yellow,war,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,8,Sweet Life,Dorothy Windsor,1684,6800000,green,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,9,The Mountains Are Calling,Swami Yoginath,1877,1500000,blue,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-painting,10,Battle of Versailles,Stephanos Adamos,1793,50000000,blue,war,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,11,Factory Girl,Robert Frank,1936,4000000,white,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,12,Afghan Girl,Steve McCurry,1984,20000000,red,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,13,Sunset in Africa,Steve McCurry,1994,4000000,red,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,14,Paris,John Banks,1998,1000000,blue,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,15,Death Stare,David Garner,2001,2000000,red,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,16,First Moon Landing,Jonathan Smith,1969,30000000,white,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,17,Tribes of Masai Mara,Sachin Patel,2012,120000,red,culture,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,18,Hollywood Star,Rachel McLeod,1965,6000000,white,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,19,Magnificent Monroe,Rachel McLeod,1973,4200000,green,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-photo,20,Surfer's Paradise,Nicholas Matthews,2015,85000,blue,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-digital,21,A World Away,Sullivan Ramsay,2018,70000,purple,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-digital,22,Yellow Eyes,Vanya Delacruz,2020,35000,green,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-digital,23,A Dying World,Alice Baishi,2021,50000,green,abstract,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-digital,24,Highrise Peace,Rico De Zoysa,2019,100000,blue,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-digital,25,Bird Man,Santiago Lopez,2020,200000,red,abstract,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-digital,26,Watercolour Memories,June Smith,2016,45000,purple,abstract,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-digital,27,Don't Look Back,Alice Baishi,2020,50000,purple,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-digital,28,Sail to Neverland,Bianca Jackson,2020,20000,red,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-digital,29,Scorched Land,Vanya Delacruz,2017,100000,blue,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
-digital,30,Dreamscape,Quinton Li,2019,64000,blue,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,0
+painting,1,Monsieur Madame,Julian Denzil,1534,5000000,white,romance,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,oil
+painting,2,Gate of the Gods,Michael Angelo,1468,24000000,blue,war,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,oil
+painting,3,Princess Rosetta,Leonardo Davinci,1834,18000000,white,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,acrylic
+painting,4,River Bank Rome,Casper David,1438,12000000,green,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,oil
+painting,5,Explorers of Yore,William Blake,1768,8000000,green,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,acrylic
+painting,6,Mona Lisa,Leonardo da Vinci,1596,900000000,yellow,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,oil
+painting,7,Wreck of the Endeavour,Hector Lazarus,1613,4500000,yellow,war,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,acrylic
+painting,8,Sweet Life,Dorothy Windsor,1684,6800000,green,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,oil
+painting,9,The Mountains Are Calling,Swami Yoginath,1877,1500000,blue,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,oil
+painting,10,Battle of Versailles,Stephanos Adamos,1793,50000000,blue,war,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,water colour
+photo,11,Factory Girl,Robert Frank,1936,4000000,white,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Hasselblad 500 C
+photo,12,Afghan Girl,Steve McCurry,1984,20000000,red,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Hasselblad 500 C
+photo,13,Sunset in Africa,Steve McCurry,1994,4000000,red,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Canon EOS R6
+photo,14,Paris,John Banks,1998,1000000,blue,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Hasselblad 500 C
+photo,15,Death Stare,David Garner,2001,2000000,red,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Sony Alpha 9
+photo,16,First Moon Landing,Jonathan Smith,1969,30000000,white,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Hasselblad 400 C
+photo,17,Tribes of Masai Mara,Sachin Patel,2012,120000,red,culture,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Hasselblad 400C
+photo,18,Hollywood Star,Rachel McLeod,1965,6000000,white,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Canon EOS R6
+photo,19,Magnificent Monroe,Rachel McLeod,1973,4200000,green,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Sony Alpha 6400
+photo,20,Surfer's Paradise,Nicholas Matthews,2015,85000,blue,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Sony Alpha 6400
+digital,21,A World Away,Sullivan Ramsay,2018,70000,purple,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Ethereum
+digital,22,Yellow Eyes,Vanya Delacruz,2020,35000,green,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Binance
+digital,23,A Dying World,Alice Baishi,2021,50000,green,abstract,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Neo
+digital,24,Highrise Peace,Rico De Zoysa,2019,100000,blue,city,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Cosmos
+digital,25,Bird Man,Santiago Lopez,2020,200000,red,abstract,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Ethereum
+digital,26,Watercolour Memories,June Smith,2016,45000,purple,abstract,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Ethereum
+digital,27,Don't Look Back,Alice Baishi,2020,50000,purple,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Cardano
+digital,28,Sail to Neverland,Bianca Jackson,2020,20000,red,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Cardano
+digital,29,Scorched Land,Vanya Delacruz,2017,100000,blue,landscape,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Ethereum
+digital,30,Dreamscape,Quinton Li,2019,64000,blue,portrait,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Ethereum

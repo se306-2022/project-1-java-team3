@@ -11,7 +11,10 @@ import android.widget.Toast;
 
 import com.example.team3.adapters.ProductAdapter;
 import com.example.team3.data.DataProvider;
+import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
+import com.example.team3.models.product.Painting;
+import com.example.team3.models.product.Photo;
 import com.example.team3.models.product.Product;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -55,11 +58,11 @@ public class MainActivity extends AppCompatActivity {
     private void fetchProductsData() {
         db.collection("Paintings").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                productsList.addAll(task.getResult().toObjects(Product.class));
+                productsList.addAll(task.getResult().toObjects(Painting.class));
                 db.collection("Digital").get().addOnSuccessListener(queryDocumentSnapshotsDigital -> {
-                    productsList.addAll(queryDocumentSnapshotsDigital.toObjects(Product.class));
+                    productsList.addAll(queryDocumentSnapshotsDigital.toObjects(Digital.class));
                     db.collection("Photos").get().addOnSuccessListener(queryDocumentSnapshotsPhotos -> {
-                        productsList.addAll(queryDocumentSnapshotsPhotos.toObjects(Product.class));
+                        productsList.addAll(queryDocumentSnapshotsPhotos.toObjects(Photo.class));
 
                         Collections.sort(productsList, (o1, o2) -> {
                             if(o1.getViewCount() == o2.getViewCount()) return 0;

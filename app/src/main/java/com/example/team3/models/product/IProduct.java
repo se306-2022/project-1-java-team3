@@ -3,6 +3,7 @@ package com.example.team3.models.product;
 import java.util.List;
 
 public interface IProduct {
+    // Applies to all categories.
     int getId();
     String getName();
     int getYear();
@@ -17,4 +18,15 @@ public interface IProduct {
     boolean getLiked();
 
     void setLiked(boolean liked);
+
+    // Category specific properties:
+    // Painting
+    String getMedium();
+
+    // Photograph
+    String getCamera();
+
+    // Digital
+    String getBlockchain();
+    String getTokenId();
 }

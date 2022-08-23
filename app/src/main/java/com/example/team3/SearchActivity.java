@@ -11,7 +11,10 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.team3.adapters.ProductAdapter;
+import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
+import com.example.team3.models.product.Painting;
+import com.example.team3.models.product.Photo;
 import com.example.team3.models.product.Product;
 import com.example.team3.utils.SearchUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -88,11 +91,11 @@ public class SearchActivity extends AppCompatActivity {
 
         db.collection("Paintings").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                productsList.addAll(task.getResult().toObjects(Product.class));
+                productsList.addAll(task.getResult().toObjects(Painting.class));
                 db.collection("Digital").get().addOnSuccessListener(queryDocumentSnapshotsDigital -> {
-                    productsList.addAll(queryDocumentSnapshotsDigital.toObjects(Product.class));
+                    productsList.addAll(queryDocumentSnapshotsDigital.toObjects(Digital.class));
                     db.collection("Photos").get().addOnSuccessListener(queryDocumentSnapshotsPhotos -> {
-                        productsList.addAll(queryDocumentSnapshotsPhotos.toObjects(Product.class));
+                        productsList.addAll(queryDocumentSnapshotsPhotos.toObjects(Photo.class));
                         allProducts.addAll(productsList);
                         adapter.notifyDataSetChanged();
                         vh.progressBar.setVisibility(View.GONE);
