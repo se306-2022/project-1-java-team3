@@ -106,8 +106,7 @@ public class DetailsActivity extends AppCompatActivity {
         ref.document(documentId).update("viewCount", FieldValue.increment(1));
     }
 
-    public void showMain(View v) {
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
+    public void goBack(View v) {
+        finish();
     }
 }

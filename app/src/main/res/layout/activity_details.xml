@@ -30,7 +30,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@color/lightGray"
-                    android:onClick="showMain"
+                    android:onClick="goBack"
                     app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
                 <com.like.LikeButton
