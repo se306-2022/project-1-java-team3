@@ -78,7 +78,7 @@ public class DetailsActivity extends AppCompatActivity {
         } else if (product instanceof Photo) {
             vh.productAddInfo.setText("Captured with " + product.getCamera());
         } else if (product instanceof Digital) {
-            vh.productAddInfo.setText("Blockchain: " + product.getBlockchain());
+            vh.productAddInfo.setText("Blockchain: " + product.getBlockchain() + "\n" + "TokenId: " + product.getTokenId());
         }
 
         vh.likeButton.setOnLikeListener(new OnLikeListener() {
