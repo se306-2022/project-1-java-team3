@@ -30,6 +30,8 @@ import com.example.team3.models.product.Painting;
 import com.example.team3.models.product.Photo;
 import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.Product;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -208,7 +210,22 @@ public class ListActivity extends AppCompatActivity {
                 } else if (category.equals("Digital")){
                     productsList.addAll(task.getResult().toObjects(Digital.class));
                 } else {
-                    productsList.addAll(task.getResult().toObjects(Product.class));
+
+                    // TODO: extract as a method, it's definitely used elsewhere.
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        IProduct tempProduct = document.toObject(Product.class);
+                        String type = tempProduct.getCategory();
+
+                        if (type.equals("painting")) {
+                            productsList.add(document.toObject(Painting.class));
+                        } else if (type.equals("photo")) {
+                            productsList.add(document.toObject(Photo.class));
+                        } else if (type.equals("digital")) {
+                            productsList.add(document.toObject(Digital.class));
+                        }
+
+                    }
+
                 }
 
                 // Dynamically setting filters based off of available products in category
