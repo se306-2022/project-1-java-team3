@@ -10,12 +10,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.team3.adapters.ProductAdapter;
-import com.example.team3.data.DataProvider;
 import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Painting;
 import com.example.team3.models.product.Photo;
-import com.example.team3.models.product.Product;
+import com.example.team3.utils.FirestoreUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Collections;
@@ -77,11 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Loading products failed.", Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    public void seedData() {
-        DataProvider dp = new DataProvider(this);
-        dp.seedData();
     }
 
     public void showPaintings(View v) {

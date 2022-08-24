@@ -1,5 +1,8 @@
 package com.example.team3.utils;
 
+import android.content.Context;
+
+import com.example.team3.data.DataProvider;
 import com.example.team3.models.product.IProduct;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -49,5 +52,13 @@ public class FirestoreUtils {
                                 .document(String.valueOf(product.getId())).delete()
                                 .addOnFailureListener(Throwable::printStackTrace)
                 );
+    }
+
+    /**
+     * Helper method to seed data to firebase.
+     */
+    public static void seedData(Context context) {
+        DataProvider dp = new DataProvider(context);
+        dp.seedData();
     }
 }

@@ -1,24 +1,16 @@
 package com.example.team3.data;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 
 import com.example.team3.R;
 import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Painting;
 import com.example.team3.models.product.Photo;
-import com.example.team3.utils.FirestoreUtils;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -27,11 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class DataProvider {
@@ -130,14 +118,9 @@ public class DataProvider {
      */
     public void setImageUrls(int id, String directory) {
         StorageReference storageRef = storage.getReference();
-        if (directory.equals("Digital")) {
-            storageRef.child(id + ".jpg").getDownloadUrl()
+        for (int i = 1; i <= 3; i++) {
+            storageRef.child(id + "_" + i + ".jpg").getDownloadUrl()
                     .addOnSuccessListener(uri -> setImageUrl(id, uri.toString(), directory));
-        } else {
-            for (int i = 1; i <= 3; i++) {
-                storageRef.child(id + "_" + i + ".jpg").getDownloadUrl()
-                        .addOnSuccessListener(uri -> setImageUrl(id, uri.toString(), directory));
-            }
         }
     }
 
