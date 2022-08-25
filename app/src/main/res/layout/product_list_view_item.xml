@@ -79,7 +79,7 @@
             android:layout_weight="1"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            app:icon_size="10dp"
+            app:icon_size="9dp"
             app:icon_type="heart"
             android:id="@+id/card_like_button"/>
 
