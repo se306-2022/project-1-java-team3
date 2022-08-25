@@ -1,19 +1,12 @@
 package com.example.team3;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.team3.adapters.ProductAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.team3.adapters.SliderAdapter;
 import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
@@ -21,15 +14,12 @@ import com.example.team3.models.product.Painting;
 import com.example.team3.models.product.Photo;
 import com.example.team3.utils.FirestoreUtils;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.smarteist.autoimageslider.SliderView;
 
-import java.util.Collection;
-import java.util.List;
+import java.text.NumberFormat;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -69,7 +59,7 @@ public class DetailsActivity extends AppCompatActivity {
         vh.productName.setText(product.getName());
         vh.productArtist.setText("Created by " + product.getArtist());
         vh.productDesc.setText(product.getDescription());
-        vh.productPrice.setText(product.getPrice() + " USD");
+        vh.productPrice.setText(NumberFormat.getInstance().format(product.getPrice()) + " USD");
         vh.sliderView.setSliderAdapter(new SliderAdapter(this, product.getImages()));
         vh.likeButton.setLiked(product.getLiked());
 

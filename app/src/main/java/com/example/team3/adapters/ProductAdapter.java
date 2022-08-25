@@ -2,14 +2,11 @@ package com.example.team3.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -22,16 +19,11 @@ import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Painting;
 import com.example.team3.models.product.Photo;
-import com.example.team3.models.product.Product;
 import com.example.team3.utils.FirestoreUtils;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
-import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
@@ -44,8 +36,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         public ViewHolder(View view) {
             super(view);
-            layout  = view.findViewById(R.id.card_layout);
-            nameTextView  = view.findViewById(R.id.product_name);
+            layout = view.findViewById(R.id.card_layout);
+            nameTextView = view.findViewById(R.id.product_name);
             priceTextView = view.findViewById(R.id.product_price);
             descriptionTextView = view.findViewById(R.id.product_artist);
             imageView = view.findViewById(R.id.product_image);
@@ -77,7 +69,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         IProduct product = products.get(position);
 
         holder.nameTextView.setText(product.getName());
-        holder.priceTextView.setText(product.getPrice() + " USD");
+        holder.priceTextView.setText(NumberFormat.getInstance().format(product.getPrice()) + " USD");
         holder.descriptionTextView.setText(product.getArtist());
         holder.likeButton.setLiked(product.getLiked());
 
@@ -115,7 +107,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     /**
      * Helper method to package intent to send to the details activity.
-     * @param v card view object.
+     *
+     * @param v       card view object.
      * @param product product details model.
      */
     private void startDetailsActivity(View v, IProduct product) {
