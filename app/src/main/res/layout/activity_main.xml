@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:style="http://schemas.android.com/tools"
     android:background="@color/mediumGray">
 
     <LinearLayout
@@ -97,35 +97,31 @@
                 android:textSize="20dp"
                 android:paddingBottom="15dp"/>
 
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/gold"
-                android:text="PHOTOGRAPHS"
-                android:textAlignment="textStart"
-                android:onClick="showPhotos"
-                android:textSize="16dp"
-                app:cornerRadius="0dp"/>
+                android:layout_height="180dp"
+                android:orientation="horizontal">
+                <Button
+                    style="@style/CategoryButton"
+                    android:text="PHOTOS"
+                    android:onClick="showPhotos"
+                    app:cornerRadius="0dp"
+                    android:drawableTop="@drawable/photos_icon" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/gold"
-                android:text="PAINTINGS"
-                android:textAlignment="textStart"
-                android:onClick="showPaintings"
-                android:textSize="16dp"
-                app:cornerRadius="0dp"/>
+                <Button
+                    style="@style/CategoryButton"
+                    android:text="PAINTINGS"
+                    android:onClick="showPaintings"
+                    app:cornerRadius="0dp"
+                    android:drawableTop="@drawable/painting_icon" />
+                <Button
+                    style="@style/CategoryButton"
+                    android:text="DIGITAL"
+                    android:onClick="showDigital"
+                    app:cornerRadius="0dp"
+                    android:drawableTop="@drawable/digital_icon"/>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/gold"
-                android:text="DIGITAL ART"
-                android:textAlignment="textStart"
-                android:onClick="showDigital"
-                android:textSize="16dp"
-                app:cornerRadius="0dp"/>
+            </LinearLayout>
 
         </LinearLayout>
 
