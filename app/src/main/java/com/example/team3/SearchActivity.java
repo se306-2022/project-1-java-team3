@@ -16,7 +16,6 @@ import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Painting;
 import com.example.team3.models.product.Photo;
-import com.example.team3.models.product.Product;
 import com.example.team3.utils.SearchUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
 
