@@ -24,11 +24,7 @@ import java.text.NumberFormat;
 public class DetailsActivity extends AppCompatActivity {
 
     private class ViewHolder {
-        public TextView productName;
-        public TextView productArtist;
-        public TextView productDesc;
-        public TextView productAddInfo;
-        public TextView productPrice;
+        public TextView productName, productArtist, productDesc, productAddInfo, productPrice, yearTextView;
         public ImageView productImage;
         public SliderView sliderView;
         public LikeButton likeButton;
@@ -42,10 +38,11 @@ public class DetailsActivity extends AppCompatActivity {
             productImage = findViewById(R.id.productImage);
             sliderView = findViewById(R.id.details_slider_view);
             likeButton = findViewById(R.id.details_like_button);
+            yearTextView = findViewById(R.id.productYear);
         }
     }
 
-    private DetailsActivity.ViewHolder vh;
+    private ViewHolder vh;
     private IProduct product;
 
     @Override
@@ -59,6 +56,7 @@ public class DetailsActivity extends AppCompatActivity {
         vh.productName.setText(product.getName());
         vh.productArtist.setText("Created by " + product.getArtist());
         vh.productDesc.setText(product.getDescription());
+        vh.yearTextView.setText(String.valueOf(product.getYear()));
         vh.productPrice.setText(NumberFormat.getInstance().format(product.getPrice()) + " USD");
         vh.sliderView.setSliderAdapter(new SliderAdapter(this, product.getImages()));
         vh.likeButton.setLiked(product.getLiked());
@@ -88,6 +86,9 @@ public class DetailsActivity extends AppCompatActivity {
         incrementViewCount();
     }
 
+    /**
+     * Helper method to update the products view count in Firestore.
+     */
     public void incrementViewCount() {
         String type = product.getCategory();
         String documentId = String.valueOf(product.getId());
