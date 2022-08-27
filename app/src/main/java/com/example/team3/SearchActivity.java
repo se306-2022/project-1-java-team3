@@ -101,6 +101,7 @@ public class SearchActivity extends AppCompatActivity {
                     productsList.addAll(queryDocumentSnapshotsDigital.toObjects(Digital.class));
                     db.collection("Photos").get().addOnSuccessListener(queryDocumentSnapshotsPhotos -> {
                         productsList.addAll(queryDocumentSnapshotsPhotos.toObjects(Photo.class));
+
                         allProducts.addAll(productsList);
                         adapter.notifyDataSetChanged();
                         vh.progressBar.setVisibility(View.GONE);
