@@ -50,8 +50,10 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        // Get product object from Intent sent from previous activity
         product = (IProduct) getIntent().getSerializableExtra("product");
 
+        // Declaring ViewHolder and setting text using product fields
         vh = new ViewHolder();
         vh.productName.setText(product.getName());
         vh.productArtist.setText("Created by " + product.getArtist());
@@ -69,6 +71,7 @@ public class DetailsActivity extends AppCompatActivity {
             vh.productAddInfo.setText("Blockchain: " + product.getBlockchain() + "\n" + "TokenId: " + product.getTokenId());
         }
 
+        // Like button listener
         vh.likeButton.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
@@ -97,6 +100,9 @@ public class DetailsActivity extends AppCompatActivity {
         ref.document(documentId).update("viewCount", FieldValue.increment(1));
     }
 
+    /**
+     * Method to finish current activity and return to previous screen.
+     */
     public void goBack(View v) {
         finish();
     }
