@@ -17,7 +17,8 @@
         <item name="android:orientation">vertical</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
     </style>
 
     <style name="filter_spinner" parent="Widget.AppCompat.Spinner">
@@ -25,12 +26,13 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:spinnerMode">dropdown</item>
+        <item name="android:paddingLeft">10dp</item>
     </style>
 
     <style name="spinner_underline">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:layout_weight">@color/gold</item>
+        <item name="android:background">@color/gold</item>
     </style>
 
     <style name="expandable_searchbar">
