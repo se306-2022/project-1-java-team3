@@ -48,7 +48,7 @@
     <style name="prod_desc_container">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:backgroundTint">@color/lightGray</item>
+        <item name="android:backgroundTint">@color/white</item>
     </style>
 
     <style name="prod_desc_text" parent="Widget.AppCompat.TextView">

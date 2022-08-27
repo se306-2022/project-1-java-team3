@@ -86,7 +86,7 @@
                 <View style="@style/underline" />
             </LinearLayout>
 
-            <androidx.cardview.widget.CardView style="@style/prod_price_container"
+            <androidx.cardview.widget.CardView style="@style/prod_desc_container"
                 app:cardUseCompatPadding="true">
 
                 <TextView style="@style/prod_desc_text"
