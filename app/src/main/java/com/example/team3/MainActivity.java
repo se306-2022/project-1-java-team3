@@ -42,12 +42,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = FirebaseFirestore.getInstance();
-
         vh = new ViewHolder();
-
         productsList = new LinkedList<>();
-        adapter = new ProductAdapter(productsList);
 
+        adapter = new ProductAdapter(productsList);
         vh.recyclerView.setAdapter(adapter);
 
         fetchProductsData();
