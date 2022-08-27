@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="price_title">Sort By Price</string>
+    <string name="price_title">Price</string>
     <string name="asc">Low to High</string>
     <string name="desc">High to Low</string>
 
@@ -12,7 +12,7 @@
         <item>@string/desc</item>
     </string-array>
 
-    <string name="theme_title">Filter By Theme</string>
-    <string name="colour_title">Filter By Colour</string>
+    <string name="theme_title">Theme</string>
+    <string name="colour_title">Colour</string>
 </resources>
 
