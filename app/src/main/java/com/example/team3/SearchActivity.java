@@ -87,7 +87,9 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Retrieves products from all categories to be searched on (has to query all collections)
+     */
     private void fetchAllProducts() {
         productsList.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
