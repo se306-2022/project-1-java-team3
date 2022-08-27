@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:style="http://schemas.android.com/tools"
     android:background="@color/mediumGray">
 
     <LinearLayout
@@ -14,10 +13,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp"
             android:background="@color/lightGray"
-            android:elevation="10dp">
+            android:elevation="10dp"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -35,7 +34,7 @@
                         android:text="GOURMET GALLERY"
                         android:textColor="@color/gray"
                         android:textSize="16dp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -83,43 +82,54 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="10dp"
                 android:text="Timeless Masterpieces"
                 android:textColor="@color/gold"
-                android:textStyle="bold"
-                android:paddingTop="10dp"
-                android:textSize="26dp"/>
+                android:textSize="26dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="15dp"
                 android:text="for your heavenly abode."
                 android:textColor="@color/gray"
-                android:textSize="20dp"
-                android:paddingBottom="15dp"/>
+                android:textSize="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:orientation="horizontal">
-                <Button
-                    style="@style/CategoryButton"
-                    android:text="PHOTOS"
-                    android:onClick="showPhotos"
-                    app:cornerRadius="0dp"
-                    android:drawableTop="@drawable/photos_icon" />
 
                 <Button
                     style="@style/CategoryButton"
-                    android:text="PAINTINGS"
-                    android:onClick="showPaintings"
-                    app:cornerRadius="0dp"
-                    android:drawableTop="@drawable/painting_icon" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/photos_icon"
+                    android:onClick="showPhotos"
+                    android:text="PHOTOS"
+                    app:cornerRadius="0dp" />
+
                 <Button
                     style="@style/CategoryButton"
-                    android:text="DIGITAL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/painting_icon"
+                    android:onClick="showPaintings"
+                    android:text="PAINTINGS"
+                    app:cornerRadius="0dp" />
+
+                <Button
+                    style="@style/CategoryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/digital_icon"
                     android:onClick="showDigital"
-                    app:cornerRadius="0dp"
-                    android:drawableTop="@drawable/digital_icon"/>
+                    android:text="DIGITAL"
+                    app:cornerRadius="0dp" />
 
             </LinearLayout>
 
@@ -134,10 +144,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray"
-                android:text="FEATURED"
                 android:gravity="center"
-                android:textSize="16dp"/>
+                android:text="FEATURED"
+                android:textColor="@color/gray"
+                android:textSize="16dp" />
 
             <ProgressBar
                 android:id="@+id/featured_progress_bar"
@@ -151,8 +161,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/et_damaged_qty"
-                app:layoutManager="LinearLayoutManager"/>
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/et_damaged_qty" />
         </LinearLayout>
 
     </LinearLayout>
