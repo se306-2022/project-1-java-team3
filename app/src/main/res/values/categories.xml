@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Paintings">PAINTINGS</string>
-    <string name="Digital">DIGITAL ART</string>
-    <string name="Photos">PHOTOGRAPHS</string>
+    <string name="paintings_full">PAINTINGS</string>
+    <string name="digital_full">DIGITAL ART</string>
+    <string name="photos_full">PHOTOGRAPHS</string>
+
+    <string name="paintings_short">PAINTINGS</string>
+    <string name="digital_short">DIGITAL</string>
+    <string name="photos_short">PHOTOS</string>
 </resources>

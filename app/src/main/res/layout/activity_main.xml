@@ -1,49 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/mediumGray">
+    style="@style/page_container">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <LinearLayout style="@style/page_container">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/lightGray"
+        <LinearLayout style="@style/header_container"
             android:elevation="10dp"
-            android:orientation="vertical"
             android:padding="16dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:orientation="horizontal">
+            <RelativeLayout style="@style/status_container">
+                <TextView style="@style/status_heading"
+                    android:text="@string/app_name" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="GOURMET GALLERY"
-                        android:textColor="@color/gray"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:orientation="horizontal">
+                <LinearLayout style="@style/status_buttons">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -51,118 +21,64 @@
                         android:layout_gravity="right"
                         android:gravity="center_vertical">
 
-                        <ImageView
+                        <ImageView style="@style/favourites_icon"
                             android:id="@+id/favourites"
-                            android:layout_width="26dp"
-                            android:layout_height="26dp"
                             android:onClick="showFavourites"
-                            app:srcCompat="@drawable/favourites" />
-
+                            app:srcCompat="@drawable/favourites"
+                            android:contentDescription="@string/fav_button_desc"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:paddingLeft="8dp">
 
-                        <ImageButton
-                            android:id="@+id/back_button"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:background="@color/lightGray"
+                        <ImageButton style="@style/search_icon"
+                            android:id="@+id/search_button"
                             android:onClick="showSearch"
-                            app:srcCompat="@drawable/ic_baseline_search_24" />
+                            app:srcCompat="@drawable/ic_baseline_search_24"
+                            android:contentDescription="@string/search_button_desc"/>
                     </LinearLayout>
-
                 </LinearLayout>
-
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:text="Timeless Masterpieces"
-                android:textColor="@color/gold"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+            <TextView style="@style/main_heading"
+                android:text="@string/main_heading"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="15dp"
-                android:text="for your heavenly abode."
-                android:textColor="@color/gray"
-                android:textSize="20dp" />
+            <TextView style="@style/main_subheading"
+                android:text="@string/main_subheading"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:orientation="horizontal">
-
-                <Button
-                    style="@style/CategoryButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+            <LinearLayout style="@style/nav_container">
+                <Button style="@style/category_buttons"
                     android:drawableTop="@drawable/photos_icon"
                     android:onClick="showPhotos"
-                    android:text="PHOTOS"
+                    android:text="@string/photos_short"
                     app:cornerRadius="0dp" />
 
-                <Button
-                    style="@style/CategoryButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                <Button style="@style/category_buttons"
                     android:drawableTop="@drawable/painting_icon"
                     android:onClick="showPaintings"
-                    android:text="PAINTINGS"
+                    android:text="@string/paintings_short"
                     app:cornerRadius="0dp" />
 
-                <Button
-                    style="@style/CategoryButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                <Button style="@style/category_buttons"
                     android:drawableTop="@drawable/digital_icon"
                     android:onClick="showDigital"
-                    android:text="DIGITAL"
+                    android:text="@string/digital_short"
                     app:cornerRadius="0dp" />
-
             </LinearLayout>
-
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+        <LinearLayout style="@style/content_container">
+            <TextView style="@style/content_heading"
+                android:text="@string/main_content_heading"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="FEATURED"
-                android:textColor="@color/gray"
-                android:textSize="16dp" />
+            <ProgressBar style="@style/loading_indicator"
+                android:id="@+id/progress_bar"/>
 
-            <ProgressBar
-                android:id="@+id/featured_progress_bar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_margin="32dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView style="@style/recycler_view"
                 android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layoutManager="LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/et_damaged_qty" />
+                app:layoutManager="LinearLayoutManager"/>
         </LinearLayout>
 
     </LinearLayout>
