@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         fetchProductsData();
     }
 
+    /**
+     * Method to retrieve all products from Firestore.
+     */
     private void fetchProductsData() {
         db.collection("Paintings").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -76,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    // Methods to navigate to other activities
 
     public void showPaintings(View v) {
         Intent listIntent = new Intent(this, ListActivity.class);
