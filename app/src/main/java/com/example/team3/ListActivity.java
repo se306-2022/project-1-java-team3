@@ -85,7 +85,6 @@ public class ListActivity extends AppCompatActivity {
         } else {
             vh.headerText.setText("FAVOURITES");
             vh.searchBar.setQueryHint("Search Favourites");
-
         }
 
         // Initialising product list in recycler view
@@ -94,6 +93,7 @@ public class ListActivity extends AppCompatActivity {
         adapter = new ProductAdapter(productsList);
         vh.recyclerView.setAdapter(adapter);
 
+        // Propagate adapter with product objects.
         fetchProductsData(category);
 
         // Filter spinner listeners for changes - price is sort, theme and colour are filter
@@ -201,29 +201,11 @@ public class ListActivity extends AppCompatActivity {
 
         db.collection(category).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                if (category.equals("Paintings")) {
-                    productsList.addAll(task.getResult().toObjects(Painting.class));
-                } else if (category.equals("Photos")) {
-                    productsList.addAll(task.getResult().toObjects(Photo.class));
-                } else if (category.equals("Digital")){
-                    productsList.addAll(task.getResult().toObjects(Digital.class));
-                } else {
 
-                    // TODO: extract as a method, it's definitely used elsewhere.
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        IProduct tempProduct = document.toObject(Product.class);
-                        String type = tempProduct.getCategory();
-
-                        if (type.equals("painting")) {
-                            productsList.add(document.toObject(Painting.class));
-                        } else if (type.equals("photo")) {
-                            productsList.add(document.toObject(Photo.class));
-                        } else if (type.equals("digital")) {
-                            productsList.add(document.toObject(Digital.class));
-                        }
-
-                    }
-
+                // Depending on the type we cast to the appropriate concrete class.
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    IProduct tempProduct = document.toObject(Product.class);
+                    productsList.add(documentToConcreteProduct(document, tempProduct));
                 }
 
                 // Dynamically setting filters based off of available products in category
@@ -233,14 +215,33 @@ public class ListActivity extends AppCompatActivity {
 
                 // Saving an instance of all the products for filtering
                 allProducts.addAll(productsList);
-
                 adapter.notifyDataSetChanged();
-
                 vh.progressBar.setVisibility(View.GONE);
+
             } else {
                 Toast.makeText(getBaseContext(), "Loading products failed.", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    /**
+     * Helper method used to determine type of product we want to cast to.
+     *
+     * @param document Firestore QueryDocumentSnapshot
+     * @param product the product temporary object.
+     * @return IProduct concrete implementation of one of the categories.
+     */
+    private IProduct documentToConcreteProduct(QueryDocumentSnapshot document, IProduct product) {
+        switch (product.getCategory()) {
+            case "painting":
+                return document.toObject(Painting.class);
+            case "photo":
+                return document.toObject(Photo.class);
+            case "digital":
+                return document.toObject(Digital.class);
+        }
+
+        return product;
     }
 
 }

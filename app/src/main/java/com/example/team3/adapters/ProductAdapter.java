@@ -68,11 +68,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         IProduct product = products.get(position);
 
+        // Populate text views.
         holder.nameTextView.setText(product.getName());
         holder.priceTextView.setText(NumberFormat.getInstance().format(product.getPrice()) + " USD");
         holder.descriptionTextView.setText(product.getArtist());
-        holder.likeButton.setLiked(product.getLiked());
-
         if (product instanceof Painting) {
             holder.extraDetails.setText("Medium: " + product.getMedium());
         } else if (product instanceof Photo) {
@@ -81,10 +80,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             holder.extraDetails.setText("Blockchain: " + product.getBlockchain());
         }
 
+        // Populate image view.
         String firstImageUrl = product.getImages().get(0);
         Glide.with(context).load(firstImageUrl).into(holder.imageView);
 
+        // Populate clickable views.
         holder.layout.setOnClickListener(v -> startDetailsActivity(v, product));
+        holder.likeButton.setLiked(product.getLiked());
         holder.likeButton.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
