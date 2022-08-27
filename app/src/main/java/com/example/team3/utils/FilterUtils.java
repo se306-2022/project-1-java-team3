@@ -63,9 +63,9 @@ public class FilterUtils {
         if (multipleFilters) {
             List<IProduct> tempFilteredProducts = filterByTheme(listToFilter, filters.get("theme"));
             filteredProducts = filterByColour(tempFilteredProducts, filters.get("mainColour"));
-        } else if (((String)filters.keySet().toArray()[0]).equals("theme")){
+        } else if (filters.keySet().toArray()[0].equals("theme")){
             filteredProducts = filterByTheme(listToFilter, filters.get("theme"));
-        } else if (((String)filters.keySet().toArray()[0]).equals("mainColour")){
+        } else if (filters.keySet().toArray()[0].equals("mainColour")){
             filteredProducts = filterByColour(listToFilter, filters.get("mainColour"));
         }
 
