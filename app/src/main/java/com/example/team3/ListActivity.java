@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -31,7 +30,6 @@ import com.example.team3.models.product.Photo;
 import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.Product;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -47,7 +45,7 @@ public class ListActivity extends AppCompatActivity {
 
         public ViewHolder() {
             recyclerView = findViewById(R.id.recycler_view);
-            progressBar = findViewById(R.id.featured_progress_bar);
+            progressBar = findViewById(R.id.progress_bar);
             headerText = findViewById(R.id.category_name);
             priceSpinner = findViewById(R.id.price_filter);
             themeSpinner = findViewById(R.id.theme_filter);
@@ -76,14 +74,14 @@ public class ListActivity extends AppCompatActivity {
 
         // Change header text and search hint
         if (Objects.equals(category, "Photos")) {
-            vh.headerText.setText(R.string.Photos);
-            vh.searchBar.setQueryHint("Search " + getString(R.string.Photos).toLowerCase());
+            vh.headerText.setText(R.string.photos_full);
+            vh.searchBar.setQueryHint("Search " + getString(R.string.photos_full).toLowerCase());
         } else if (Objects.equals(category, "Paintings")) {
-            vh.headerText.setText(R.string.Paintings);
-            vh.searchBar.setQueryHint("Search " + getString(R.string.Paintings).toLowerCase());
+            vh.headerText.setText(R.string.paintings_full);
+            vh.searchBar.setQueryHint("Search " + getString(R.string.paintings_full).toLowerCase());
         } else if (Objects.equals(category, "Digital")) {
-            vh.headerText.setText(R.string.Digital);
-            vh.searchBar.setQueryHint("Search " + getString(R.string.Digital).toLowerCase());
+            vh.headerText.setText(R.string.digital_full);
+            vh.searchBar.setQueryHint("Search " + getString(R.string.digital_full).toLowerCase());
         } else {
             vh.headerText.setText("FAVOURITES");
             vh.searchBar.setQueryHint("Search Favourites");

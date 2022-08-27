@@ -14,7 +14,6 @@ import com.example.team3.models.product.Digital;
 import com.example.team3.models.product.IProduct;
 import com.example.team3.models.product.Painting;
 import com.example.team3.models.product.Photo;
-import com.example.team3.utils.FirestoreUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Collections;
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         public ProgressBar progressBar;
         public ViewHolder() {
             recyclerView = findViewById(R.id.recycler_view);
-            progressBar = findViewById(R.id.featured_progress_bar);
+            progressBar = findViewById(R.id.progress_bar);
         }
     }
 

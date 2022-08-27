@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">team3</string>
+    <string name="app_name">GOURMET GALLERY</string>
+    <string name="loading">LOADING...</string>
+    <string name="loading_num">00.00</string>
+    <string name="back_button_desc">Back button to navigate to previous activity</string>
+    <string name="fav_button_desc">Favourites button to navigate to favourites list</string>
+    <string name="search_button_desc">Search button to navigate to searching functionality</string>
+    <string name="image_temp_desc">Image of artwork</string>
 </resources>
